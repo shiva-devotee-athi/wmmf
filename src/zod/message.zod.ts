@@ -1,0 +1,6 @@
+export type MessageDoc = {
+  name: string;
+  email: string;
+  message: string;
+  read: boolean;
+};

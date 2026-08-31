@@ -1,0 +1,80 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "motion/react";
+import { ArrowRight, Calendar } from "lucide-react";
+import { newsItems } from "@/data/news";
+import Image from "next/image";
+
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
+  },
+};
+
+export default function NewsGrid() {
+  return (
+    <motion.div
+      variants={container}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-10%" }}
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {newsItems.map((news) => (
+        <motion.div key={news.slug} variants={item} whileHover={{ y: -6 }}>
+          <article className="group flex h-full flex-col overflow-hidden rounded-[var(--card-corner-radius)] border border-black/[var(--card-border-opacity)] bg-white shadow-[var(--card-shadow-horizontal-offset)_var(--card-shadow-vertical-offset)_var(--card-shadow-blur-radius)_rgba(10,10,10,var(--card-shadow-opacity))] transition-shadow duration-200 hover:shadow-xl">
+            <div className="relative aspect-[16/10] overflow-hidden bg-secondary-100">
+              <Image
+                src={news.image}
+                alt={news.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+
+              <div className="absolute left-3 top-3 rounded-[var(--badge-corner-radius)] bg-primary-600 px-3 py-1 font-body text-[11px] font-semibold text-white">
+                {news.category}
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary-700/20 to-secondary-900/40 transition-transform duration-300 group-hover:scale-105" />
+            </div>
+
+            <div className="flex flex-1 flex-col p-5">
+              <div className="flex items-center gap-1.5 font-body text-[12px] text-muted-foreground">
+                <Calendar className="h-3.5 w-3.5" />
+                <time dateTime={news.date}>
+                  {new Date(news.date).toLocaleDateString("en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  })}
+                </time>
+              </div>
+              <h2 className="mt-2 font-heading text-[17px] font-semibold leading-snug text-secondary-900 transition-colors group-hover:text-primary-600">
+                {news.title}
+              </h2>
+              <p className="mt-2 line-clamp-3 font-body text-[13.5px] leading-relaxed text-muted-foreground">
+                {news.excerpt}
+              </p>
+              <Link
+                href={`/news/${news.slug}`}
+                className="mt-4 inline-flex items-center gap-1.5 font-body text-[13.5px] font-semibold text-primary-600 transition-colors hover:text-primary-700"
+              >
+                Learn more
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </article>
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+}
