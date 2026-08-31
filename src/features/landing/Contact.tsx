@@ -43,7 +43,11 @@ const item = {
   },
 };
 
-export default function ContactSection() {
+export default function ContactSection({
+  searchParams,
+}: {
+  searchParams: Promise<{ intent?: string }>;
+}) {
   const titleContainer = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
@@ -100,7 +104,7 @@ export default function ContactSection() {
         >
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
-              <ContactForm />
+              <ContactForm searchParams={searchParams} />
             </div>
 
             <motion.div

@@ -1,5 +1,6 @@
 "use client";
 
+import { use } from "react";
 import { motion } from "motion/react";
 import { ArrowUpRight, Loader2, Send } from "lucide-react";
 import { toast } from "sonner";
@@ -8,11 +9,14 @@ import { FieldError, useForm, UseFormRegister } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { db } from "@/lib/firebase";
 import { ContactFormData, contactSchema } from "@/zod/contact.zod";
-import { useSearchParams } from "next/navigation";
 
-export default function ContactForm() {
-  const searchParams = useSearchParams();
-  const intent = searchParams.get("intent") || "general";
+export default function ContactForm({
+  searchParams,
+}: {
+  searchParams: Promise<{ intent?: string }>;
+}) {
+  const params = use(searchParams);
+  const intent = params.intent || "general";
   const {
     register,
     handleSubmit,

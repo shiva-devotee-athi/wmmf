@@ -1,7 +1,6 @@
 import PageBanner from "@/components/layout/PageBanner";
 import Contact from "@/features/landing/Contact";
 import type { Metadata } from "next";
-import React from "react";
 
 export const metadata: Metadata = {
   title: "Contact Us | WMMF",
@@ -30,7 +29,11 @@ export const metadata: Metadata = {
   },
 };
 
-const ContactPage = () => {
+const ContactPage = ({
+  searchParams,
+}: {
+  searchParams: Promise<{ intent?: string }>;
+}) => {
   return (
     <>
       <PageBanner
@@ -38,7 +41,7 @@ const ContactPage = () => {
         breadcrumbs={[{ label: "Contact" }]}
         backgroundImage="/images/banners/page-banner.webp"
       />
-      <Contact />
+      <Contact searchParams={searchParams} />
     </>
   );
 };
