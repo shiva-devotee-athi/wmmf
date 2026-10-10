@@ -219,7 +219,7 @@ export default function Footer() {
           <div className="md:w-[300px]">
             <Link href="/" className="flex items-center gap-2">
               <Image
-                src="/images/logo.png"
+                src="/images/logos/logo.png"
                 alt="logo"
                 width={60}
                 height={60}
@@ -272,10 +272,10 @@ export default function Footer() {
               </div>
               <div className="ml-[16px]">
                 <a
-                  href={`mailto:${siteConfig.email}`}
+                  href={`mailto:${siteConfig.primary_email}`}
                   className="font-body text-[14px] font-medium text-white"
                 >
-                  {siteConfig.email}
+                  {siteConfig.primary_email}, {siteConfig.secondary_email}
                 </a>
                 <p className="font-body text-[12px] font-medium text-white/60">
                   Support Email

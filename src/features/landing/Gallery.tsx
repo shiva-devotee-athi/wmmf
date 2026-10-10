@@ -6,32 +6,95 @@ import { Camera, Film } from "lucide-react";
 import AnimatedTabs from "@/components/common/AnimatedTabs";
 import PhotoGrid from "./gallery/PhotoGrid";
 import VideoGrid from "./gallery/VideoGrid";
-import { mediaEvents } from "@/data/media";
+import { mediaEvents, type MediaPhoto, type MediaVideo } from "@/data/media";
+import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
+import type { MediaPhotoDoc, MediaVideoDoc } from "@/types/media";
 
 type MediaType = "photos" | "videos";
 
 export default function Gallery() {
-  const [eventSlug, setEventSlug] = useState(mediaEvents[0].slug);
+  const { items: photoDocs } =
+    useFirestoreCollection<MediaPhotoDoc>("mediaPhotos");
+  const { items: videoDocs } =
+    useFirestoreCollection<MediaVideoDoc>("mediaVideos");
+
+  const [eventSlug, setEventSlug] = useState<string>("all");
   const [mediaType, setMediaType] = useState<MediaType>("photos");
+
+  const firestoreEventsMap = new Map<string, string>();
+  photoDocs.forEach((d) => {
+    if (d.eventSlug && d.eventName)
+      firestoreEventsMap.set(d.eventSlug, d.eventName);
+  });
+  videoDocs.forEach((d) => {
+    if (d.eventSlug && d.eventName)
+      firestoreEventsMap.set(d.eventSlug, d.eventName);
+  });
+
+  const hasFirestoreMedia = photoDocs.length > 0 || videoDocs.length > 0;
+
+  const eventTabs = hasFirestoreMedia
+    ? [
+        { id: "all", label: "All Events" },
+        ...Array.from(firestoreEventsMap.entries()).map(([slug, name]) => ({
+          id: slug,
+          label: name,
+        })),
+      ]
+    : mediaEvents.map((e) => ({ id: e.slug, label: e.location }));
 
   const activeEvent =
     mediaEvents.find((e) => e.slug === eventSlug) ?? mediaEvents[0];
 
-  const eventTabs = mediaEvents.map((e) => ({ id: e.slug, label: e.location }));
+  const firestorePhotos: MediaPhoto[] = photoDocs.map((p) => ({
+    id: p.id,
+    imageUrl: p.imageUrl,
+    publicId: p.publicId,
+    alt: p.alt || p.eventName || "WMMF Gallery Photo",
+  }));
+
+  const firestoreVideos: MediaVideo[] = videoDocs.map((v) => ({
+    id: v.id,
+    youtubeId: v.youtubeId,
+    title: v.title || v.eventName || "WMMF Gallery Video",
+  }));
+
+  const photosToDisplay: MediaPhoto[] = hasFirestoreMedia
+    ? eventSlug === "all"
+      ? firestorePhotos
+      : firestorePhotos.filter((p) => {
+          const doc = photoDocs.find((d) => d.id === p.id);
+          return doc?.eventSlug === eventSlug;
+        })
+    : activeEvent.photos;
+
+  const videosToDisplay: MediaVideo[] = hasFirestoreMedia
+    ? eventSlug === "all"
+      ? firestoreVideos
+      : firestoreVideos.filter((v) => {
+          const doc = videoDocs.find((d) => d.id === v.id);
+          return doc?.eventSlug === eventSlug;
+        })
+    : activeEvent.videos;
+
   const mediaTabs = [
-    { id: "photos", label: "Photo Gallery" },
-    { id: "videos", label: "Video Gallery" },
+    { id: "photos", label: `Photo Gallery (${photosToDisplay.length})` },
+    { id: "videos", label: `Video Gallery (${videosToDisplay.length})` },
   ];
 
   return (
     <section className="py-[var(--spacing-sections-mobile)] md:py-[var(--spacing-sections-desktop)]">
       <div className="mx-auto w-full max-w-[1280px] px-4 xl:px-0">
         {/* Event tabs */}
-        {mediaEvents.length > 1 && (
-          <div className="mb-8 flex justify-center">
+        {eventTabs.length > 1 && (
+          <div className="mb-8 flex flex-wrap justify-center gap-2">
             <AnimatedTabs
               tabs={eventTabs}
-              activeId={eventSlug}
+              activeId={
+                eventSlug === "all" && !hasFirestoreMedia
+                  ? mediaEvents[0].slug
+                  : eventSlug
+              }
               onChange={setEventSlug}
               layoutId="event-tab-indicator"
             />
@@ -40,7 +103,7 @@ export default function Gallery() {
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeEvent.slug}
+            key={eventSlug}
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
@@ -48,10 +111,16 @@ export default function Gallery() {
           >
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="font-heading text-[26px] font-bold text-secondary-900 sm:text-[30px]">
-                {activeEvent.name}
+                {hasFirestoreMedia
+                  ? eventSlug === "all"
+                    ? "WMMF Media Gallery"
+                    : (firestoreEventsMap.get(eventSlug) ?? "WMMF Event")
+                  : activeEvent.name}
               </h2>
               <p className="mt-3 font-body text-[14.5px] leading-relaxed text-muted-foreground">
-                {activeEvent.description}
+                {hasFirestoreMedia
+                  ? "Explore photos and video highlights from WMMF tournaments and global events."
+                  : activeEvent.description}
               </p>
             </div>
 
@@ -79,7 +148,13 @@ export default function Gallery() {
                       <Camera className="h-4 w-4" />
                       Photo gallery
                     </div>
-                    <PhotoGrid photos={activeEvent.photos} />
+                    {photosToDisplay.length > 0 ? (
+                      <PhotoGrid photos={photosToDisplay} />
+                    ) : (
+                      <p className="py-12 text-center font-body text-[14px] text-muted-foreground">
+                        No photos found for this event.
+                      </p>
+                    )}
                   </motion.div>
                 ) : (
                   <motion.div
@@ -93,7 +168,13 @@ export default function Gallery() {
                       <Film className="h-4 w-4" />
                       Video gallery
                     </div>
-                    <VideoGrid videos={activeEvent.videos} />
+                    {videosToDisplay.length > 0 ? (
+                      <VideoGrid videos={videosToDisplay} />
+                    ) : (
+                      <p className="py-12 text-center font-body text-[14px] text-muted-foreground">
+                        No videos found for this event.
+                      </p>
+                    )}
                   </motion.div>
                 )}
               </AnimatePresence>

@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import DataTable, { type Column } from "@/features/admin/components/DataTable";
 import FormModal from "@/features/admin/components/FormModal";
 import FormField from "@/features/admin/components/FormField";
-import ImageUploader from "@/features/admin/components/ImageUploader";
+import FileUploader from "@/features/admin/components/FileUploader";
 import {
   useFirestoreCollection,
   type WithId,
@@ -17,7 +17,7 @@ import type { NewsDoc } from "@/types/news";
 const emptyForm: NewsDoc = {
   title: "",
   slug: "",
-  excerpt: "",
+  subTitle: "",
   content: "",
   date: new Date().toISOString().slice(0, 10),
   category: "",
@@ -120,6 +120,7 @@ export default function AdminNewsPage() {
         rows={items}
         loading={loading}
         emptyLabel="No articles yet. Create your first one."
+        pageSize={12}
         onEdit={openEdit}
         onDelete={handleDelete}
       />
@@ -145,11 +146,21 @@ export default function AdminNewsPage() {
             }}
           />
           <FormField
+            label="Sub Title"
+            required
+            value={form.subTitle}
+            onChange={(e) =>
+              setForm((f) => ({ ...f, subTitle: e.target.value }))
+            }
+          />
+          <FormField
             label="Slug"
             required
             value={form.slug}
-            onChange={(e) => setForm((f) => ({ ...f, slug: e.target.value }))}
-            hint="Used in the URL: /news/your-slug"
+            onChange={(e) =>
+              setForm((f) => ({ ...f, slug: `/news/${e.target.value}` }))
+            }
+            hint="Used in the URL: your-slug"
           />
           <div className="grid grid-cols-2 gap-4">
             <FormField
@@ -169,16 +180,7 @@ export default function AdminNewsPage() {
               onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
             />
           </div>
-          <FormField
-            label="Excerpt"
-            as="textarea"
-            rows={2}
-            required
-            value={form.excerpt}
-            onChange={(e) =>
-              setForm((f) => ({ ...f, excerpt: e.target.value }))
-            }
-          />
+
           <FormField
             label="Content"
             as="textarea"
@@ -197,7 +199,7 @@ export default function AdminNewsPage() {
             placeholder="National Team, Qualifiers"
             hint="Comma-separated"
           />
-          <ImageUploader
+          <FileUploader
             label="Featured Image"
             value={form.image}
             folder="wmmf/news"

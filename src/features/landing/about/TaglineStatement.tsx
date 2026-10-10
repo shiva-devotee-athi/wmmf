@@ -8,12 +8,18 @@ export default function TaglineStatement() {
   return (
     <section className="py-[var(--spacing-sections-mobile)] md:py-[var(--spacing-sections-desktop)]">
       <div className="mx-auto flex w-full max-w-[880px] flex-col items-center px-4 text-center xl:px-0">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-secondary-400 font-heading text-lg sm:text-xl font-bold uppercase tracking-wider border-b border-black/10 pb-6">
+          <span>Bringing Football Closer</span>
+          <span className="hidden sm:inline text-black/30">•</span>
+          <span>Taking the Game Further</span>
+        </div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-body text-[13px] font-semibold uppercase tracking-[0.2em] text-primary-600"
+          className="font-body text-[13px] font-semibold uppercase tracking-[0.2em] text-primary-600 pt-6"
         >
           WMMF
         </motion.p>

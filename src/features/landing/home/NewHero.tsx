@@ -160,12 +160,12 @@ export default function NewHero() {
           >
             <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary-900 px-3.5 py-1.5 font-body text-[12.5px] font-semibold text-white shadow-lg">
               <Zap className="h-3.5 w-3.5 text-primary-400" />
-              Fast • Dynamic
+              Feel the Rush
             </span>
 
             <span className="inline-flex items-center gap-1.5 rounded-full border border-secondary-200 bg-white/80 px-3.5 py-1.5 font-body text-[12.5px] font-semibold text-secondary-700 backdrop-blur-md">
               <Users2 className="h-3.5 w-3.5" />
-              Member Nations Worldwide
+              Dare to Play
             </span>
           </motion.div>
 

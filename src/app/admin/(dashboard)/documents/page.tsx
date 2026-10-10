@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import DataTable, { type Column } from "@/features/admin/components/DataTable";
 import FormModal from "@/features/admin/components/FormModal";
 import FormField from "@/features/admin/components/FormField";
-import ImageUploader from "@/features/admin/components/ImageUploader";
+import FileUploader from "@/features/admin/components/FileUploader";
 import {
   useFirestoreCollection,
   type WithId,
@@ -143,17 +143,25 @@ export default function AdminDocumentsPage() {
               onChange={(e) =>
                 setForm((f) => ({ ...f, fileSize: e.target.value }))
               }
-              placeholder="1.2 MB"
+              placeholder="Auto-calculated (e.g. 1.2 MB)"
+              hint="Automatically calculated when a file is uploaded"
             />
           </div>
 
-          <ImageUploader
-            label="PDF File"
+          <FileUploader
+            label="Document File"
             value={form.fileUrl}
             folder="wmmf/documents"
             resourceType="raw"
-            onUploaded={({ url }) => setForm((f) => ({ ...f, fileUrl: url }))}
-            onClear={() => setForm((f) => ({ ...f, fileUrl: "" }))}
+            sizeLimit={5}
+            onUploaded={({ url, fileSize }) =>
+              setForm((f) => ({
+                ...f,
+                fileUrl: url,
+                fileSize: fileSize || f.fileSize,
+              }))
+            }
+            onClear={() => setForm((f) => ({ ...f, fileUrl: "", fileSize: "" }))}
           />
 
           <div className="flex justify-end gap-3 pt-2">

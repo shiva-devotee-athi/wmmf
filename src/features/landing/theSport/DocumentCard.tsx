@@ -6,14 +6,14 @@ import { FileText, Download } from "lucide-react";
 type Props = {
   title: string;
   description: string;
-  fileHref: string;
+  fileUrl: string;
   fileSize?: string;
 };
 
 export default function DocumentCard({
   title,
   description,
-  fileHref,
+  fileUrl,
   fileSize,
 }: Props) {
   return (
@@ -45,7 +45,7 @@ export default function DocumentCard({
       </div>
 
       <a
-        href={fileHref}
+        href={fileUrl}
         target="_blank"
         rel="noopener noreferrer"
         className="inline-flex shrink-0 items-center gap-2 rounded-full bg-secondary-900 px-5 py-2.5 font-body text-[13.5px] font-semibold text-white transition-transform duration-150 hover:scale-[1.03] hover:bg-secondary-800"

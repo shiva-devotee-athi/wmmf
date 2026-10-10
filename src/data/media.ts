@@ -2,6 +2,7 @@ export type MediaPhoto = {
   id: string;
   /** Cloudinary public ID, e.g. "wmmf/pune/photo-01" */
   publicId: string;
+  imageUrl: string;
   alt: string;
 };
 
@@ -45,54 +46,66 @@ export const mediaEvents: MediaEvent[] = [
     photos: [
       {
         id: "p1",
-        publicId: "samples/sports/football",
+        imageUrl:
+          "https://res.cloudinary.com/deu93r3up/image/upload/v1791646754/wmmf/media/eh9yjv7nvealquxbrpmh.jpg",
+        publicId: "wmmf/media/eh9yjv7nvealquxbrpmh",
         alt: "WMMF demonstration action shot, Pune",
       },
       {
         id: "p2",
-        publicId: "samples/people/kitchen-bar",
+        imageUrl:
+          "https://res.cloudinary.com/deu93r3up/image/upload/v1791646063/wmmf/media/wxweittxa5mbp977fnby.jpg",
+        publicId: "wmmf/media/wxweittxa5mbp977fnby",
         alt: "Players and officials at the WMMF Pune event",
       },
       {
         id: "p3",
-        publicId: "samples/landscapes/nature-mountains",
+        imageUrl:
+          "https://res.cloudinary.com/deu93r3up/image/upload/v1791646744/wmmf/media/dvv3epgmddgvff91l6zy.jpg",
+        publicId: "wmmf/media/dvv3epgmddgvff91l6zy",
         alt: "WMMF Pune venue overview",
       },
       {
         id: "p4",
-        publicId: "samples/sports/basketball",
+        imageUrl:
+          "https://res.cloudinary.com/deu93r3up/image/upload/v1791646086/wmmf/media/ejmvasqcooepluoffkty.jpg",
+        publicId: "wmmf/media/ejmvasqcooepluoffkty",
         alt: "Match action during the WMMF Pune demonstration",
       },
       {
         id: "p5",
-        publicId: "samples/people/boy-snow-hoodie",
+        imageUrl:
+          "https://res.cloudinary.com/deu93r3up/image/upload/v1791646125/wmmf/media/yuxjll659sbunegla4ao.jpg",
+        publicId: "wmmf/media/yuxjll659sbunegla4ao",
         alt: "Young player at the WMMF Pune demonstration",
       },
       {
         id: "p6",
-        publicId: "samples/landscapes/architecture-signs",
+        imageUrl:
+          "https://res.cloudinary.com/deu93r3up/image/upload/v1791646729/wmmf/media/w39m2d03xz4lsyhef5ae.jpg",
+        publicId: "wmmf/media/w39m2d03xz4lsyhef5ae",
         alt: "WMMF Pune event signage",
       },
     ],
     videos: [
       {
         id: "v1",
-        youtubeId: "M7lc1UVf-VE",
+        youtubeId: "Xim8-lUZnsA",
         title: "WMMF Demonstration - Pune, India",
       },
       {
         id: "v2",
-        youtubeId: "M7lc1UVf-VE",
+        youtubeId: "79-7SEVb5Ss",
         title: "WMMF Demonstration - Pune, India",
       },
       {
         id: "v3",
-        youtubeId: "M7lc1UVf-VE",
+        youtubeId: "-JWG43D66qI",
         title: "WMMF Demonstration - Pune, India",
       },
       {
         id: "v4",
-        youtubeId: "M7lc1UVf-VE",
+        youtubeId: "MEk1FFFRQ7o",
         title: "WMMF Demonstration - Pune, India",
       },
       {

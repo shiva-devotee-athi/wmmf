@@ -37,7 +37,7 @@ export default function StatsStrip() {
       {/* Background Drawing / Sketches Watermark */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.14]">
         <Image
-          src="/images/sketches/sketch_1.webp"
+          src="/images/sketches/sketch_2.webp"
           alt="Sports sketch background"
           fill
           className="object-cover object-center mix-blend-multiply"

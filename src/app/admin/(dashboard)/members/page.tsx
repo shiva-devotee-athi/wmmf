@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import DataTable, { type Column } from "@/features/admin/components/DataTable";
 import FormModal from "@/features/admin/components/FormModal";
 import FormField from "@/features/admin/components/FormField";
-import ImageUploader from "@/features/admin/components/ImageUploader";
+import FileUploader from "@/features/admin/components/FileUploader";
 import {
   useFirestoreCollection,
   type WithId,
@@ -102,6 +102,7 @@ export default function AdminMembersPage() {
         rows={items}
         loading={loading}
         emptyLabel="No members yet."
+        pageSize={12}
         onEdit={openEdit}
         onDelete={handleDelete}
       />
@@ -133,8 +134,9 @@ export default function AdminMembersPage() {
             onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))}
             hint="Separate paragraphs with a blank line. Leave blank for 'Biography coming soon.'"
           />
-          <ImageUploader
+          <FileUploader
             label="Photo"
+            sizeLimit={2}
             value={form.image}
             folder="wmmf/members"
             onUploaded={({ url }) => setForm((f) => ({ ...f, image: url }))}

@@ -63,6 +63,15 @@ export default function NewsArticle({ article, prev, next }: Props) {
           {article.title}
         </motion.h1>
 
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mt-4 font-heading text-[20px] font-medium leading-tight text-secondary-600 sm:text-[24px]"
+        >
+          {article.subTitle}
+        </motion.h2>
+
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -71,18 +80,7 @@ export default function NewsArticle({ article, prev, next }: Props) {
           className="prose-wmmf mt-8 space-y-4 font-body text-[15.5px] leading-relaxed text-secondary-700"
         >
           {article.content.map((paragraph, i) => {
-            const isTagline =
-              i >= article.content.length - 3 && article.content.length > 3;
-            return isTagline ? (
-              <p
-                key={i}
-                className="font-heading text-[16px] font-bold text-primary-600"
-              >
-                {paragraph}
-              </p>
-            ) : (
-              <p key={i}>{paragraph}</p>
-            );
+            return <p key={i}>{paragraph}</p>;
           })}
         </motion.div>
 

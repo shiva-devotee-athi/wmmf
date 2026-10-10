@@ -41,8 +41,8 @@ export default function PrivacyPolicyPage() {
       />
       <PageBanner
         title="Privacy Policy"
-        eyebrow="Legal"
         breadcrumbs={[{ label: "Privacy Policy" }]}
+        backgroundImage="/images/banners/page-banner.webp"
       />
       <PrivacyPolicy />
     </>

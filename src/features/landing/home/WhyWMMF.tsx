@@ -94,22 +94,46 @@ export default function WhyWMMF() {
 
             {/* Heading */}
             <h2 className="mt-3 font-heading text-[32px] font-extrabold uppercase leading-[1.08] tracking-tight text-secondary-950 sm:text-[40px] lg:text-[46px]">
-              The Future of{" "}
-              <span className="text-primary-600">Mini Mini Football</span>
+              Fewer Players {" "}
+              <span className="text-primary-600">   More Football</span>
             </h2>
 
             {/* Description */}
             <p className="mt-4 font-body text-[14.5px] leading-relaxed text-muted-foreground">
-              World Mini Mini Football (WMMF) is built on the belief that sport
-              should be fast, inclusive, affordable, and accessible to everyone.
-              Our standardized international format develops quick thinking,
-              confidence, creativity, teamwork, and decision-making while
-              creating opportunities for children, families, schools, and
-              communities to participate together. Through education, integrity,
-              and international cooperation, WMMF is building a global movement
-              where every player belongs, every family is welcome, and every
-              match creates opportunities to learn, grow, and enjoy the game.
+              WMMF takes football to its essential elements: the player, the ball, the space,
+              and the decision. With only three players on each side,
+              the game becomes faster, closer, and more demanding — placing every
+              player at the center of the action.
             </p>
+            <p className="mt-4 font-body text-[14.5px] leading-relaxed text-muted-foreground">
+              This is what makes WMMF different. We have reduced the numbers,
+              the space, and the distance to the ball — but not the football.
+            </p>
+
+            <h1 className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900 sm:gap-8 pt-5"> Everyone Is in the Game
+            </h1>
+            <p className="mt-4 font-body text-[14.5px] leading-relaxed text-muted-foreground">
+              Three players means three players fully involved. Attack, defend, create,
+              support, and compete — every player carries responsibility for the team.</p>
+            <h1 className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900 sm:gap-8 pt-5">
+              Every Touch Matters
+            </h1>
+            <p className="mt-4 font-body text-[14.5px] leading-relaxed text-muted-foreground">
+              With less space and less time, technical quality becomes decisive. Control, movement,
+              creativity, and quick decision-making are tested on every possession.</p>
+            <h1 className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900 sm:gap-8 pt-5">
+              Play It Anywhere
+            </h1>
+            <p className="mt-4 font-body text-[14.5px] leading-relaxed text-muted-foreground">
+              WMMF is designed to fit modern communities and modern lifestyles. Its compact format makes the game
+              easier to organize and bring to clubs, schools, communities, and new football spaces.</p>
+            <h1 className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900 sm:gap-8 pt-5">
+              One Game. One Global Framework
+            </h1>
+            <p className="mt-4 font-body text-[14.5px] leading-relaxed text-muted-foreground">
+              WMMF brings consistency to the format through unified rules, trained officials,
+              structured competitions, and an international network of Member Associations.</p>
+
 
             {/* Highlight Badges */}
             <div className="mt-7 flex flex-wrap items-center gap-6 sm:gap-8">
@@ -118,7 +142,7 @@ export default function WhyWMMF() {
                   <Target className="h-5 w-5" />
                 </div>
                 <span className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900">
-                  International Standards
+                  Fewer Players
                 </span>
               </div>
 
@@ -127,7 +151,15 @@ export default function WhyWMMF() {
                   <Globe2 className="h-5 w-5" />
                 </div>
                 <span className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900">
-                  Development & Education
+                  More Responsibility
+                </span>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-600 text-white shadow-md shadow-primary-600/25">
+                  <Globe2 className="h-5 w-5" />
+                </div>
+                <span className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900">
+                  More Football
                 </span>
               </div>
             </div>
@@ -179,6 +211,6 @@ export default function WhyWMMF() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </section >
   );
 }

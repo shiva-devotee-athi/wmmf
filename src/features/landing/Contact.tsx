@@ -9,8 +9,8 @@ import AnimatedDivider from "@/components/common/Animateddivider";
 const infoItems = [
   {
     icon: Headset,
-    title: "Technical Support",
-    lines: [siteConfig.email],
+    title: "Email",
+    lines: [siteConfig.primary_email, siteConfig.secondary_email],
   },
   {
     icon: MapPin,
@@ -142,7 +142,7 @@ export default function ContactSection({
               </div>
               <div className="relative h-[300px] w-full overflow-hidden">
                 <iframe
-                  src="https://www.google.com/maps?q=Pune,Maharashtra,India&output=embed"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d74343.48865816773!2d78.1251241129336!3d11.680352958301626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf1ccf52cba0b%3A0xee9989007068ca47!2sSalem%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1791620176859!5m2!1sen!2sin"
                   className="h-full w-full border-0"
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"

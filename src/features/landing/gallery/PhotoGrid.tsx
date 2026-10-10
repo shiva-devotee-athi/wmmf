@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 import Skeleton from "@/components/common/Skeleton";
 import { cloudinaryUrl, type MediaPhoto } from "@/data/media";
+import Pagination from "@/components/common/Pagination";
 
 function PhotoTile({
   photo,
@@ -15,6 +16,9 @@ function PhotoTile({
   onOpen: () => void;
 }) {
   const [loaded, setLoaded] = useState(false);
+  const imageSrc = photo.imageUrl?.startsWith("http")
+    ? photo.imageUrl
+    : cloudinaryUrl(photo.publicId, 600);
 
   return (
     <motion.button
@@ -30,7 +34,7 @@ function PhotoTile({
         <Skeleton className="absolute inset-0 rounded-[var(--card-corner-radius)]" />
       )}
       <Image
-        src={cloudinaryUrl(photo.publicId, 600)}
+        src={imageSrc}
         alt={photo.alt}
         fill
         loading="lazy"
@@ -48,7 +52,16 @@ function PhotoTile({
 }
 
 export default function PhotoGrid({ photos }: { photos: MediaPhoto[] }) {
+  const [page, setPage] = useState(1);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
+  const pageSize = 16;
+  const totalPages = Math.ceil(photos.length / pageSize);
+  const currentPage = Math.min(page, totalPages || 1);
+  const paginatedPhotos = photos.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
 
   const close = () => setActiveIndex(null);
   const prev = () =>
@@ -59,22 +72,36 @@ export default function PhotoGrid({ photos }: { photos: MediaPhoto[] }) {
     setActiveIndex((i) => (i === null ? null : (i + 1) % photos.length));
 
   return (
-    <>
+    <div className="space-y-8">
       <motion.div
+        key={currentPage}
         layout
         className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4"
       >
-        {photos.map((photo, i) => (
-          <PhotoTile
-            key={photo.id}
-            photo={photo}
-            onOpen={() => setActiveIndex(i)}
-          />
-        ))}
+        {paginatedPhotos.map((photo, pageIdx) => {
+          const absoluteIndex = (currentPage - 1) * pageSize + pageIdx;
+          return (
+            <PhotoTile
+              key={photo.id}
+              photo={photo}
+              onOpen={() => setActiveIndex(absoluteIndex)}
+            />
+          );
+        })}
       </motion.div>
 
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          totalItems={photos.length}
+          pageSize={pageSize}
+        />
+      )}
+
       <AnimatePresence>
-        {activeIndex !== null && (
+        {activeIndex !== null && photos[activeIndex] && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -112,7 +139,11 @@ export default function PhotoGrid({ photos }: { photos: MediaPhoto[] }) {
               className="relative aspect-[4/3] w-full max-w-3xl"
             >
               <Image
-                src={cloudinaryUrl(photos[activeIndex].publicId, 1400)}
+                src={
+                  photos[activeIndex].publicId?.startsWith("http")
+                    ? photos[activeIndex].publicId
+                    : cloudinaryUrl(photos[activeIndex].publicId, 1400)
+                }
                 alt={photos[activeIndex].alt}
                 fill
                 className="rounded-lg object-contain"
@@ -134,6 +165,6 @@ export default function PhotoGrid({ photos }: { photos: MediaPhoto[] }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

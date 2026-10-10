@@ -94,9 +94,9 @@ const jsonLd = {
   name: siteConfig.name,
   alternateName: siteConfig.shortName,
   url: siteConfig.url,
-  logo: `${siteConfig.url}/logo.png`,
+  logo: `${siteConfig.url}/logos/logo.png`,
   description: siteConfig.description,
-  email: siteConfig.email,
+  email: siteConfig.primary_email,
   telephone: siteConfig.phone,
   address: {
     "@type": "PostalAddress",
@@ -104,6 +104,8 @@ const jsonLd = {
   },
   sameAs: Object.values(siteConfig.social),
 };
+
+import FirestoreSeeder from "@/components/common/FirestoreSeeder";
 
 export default function RootLayout({
   children,
@@ -120,6 +122,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-screen flex-col antialiased">
+        <FirestoreSeeder />
         {children}
         <Toaster
           position="top-center"

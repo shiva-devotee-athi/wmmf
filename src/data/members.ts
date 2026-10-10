@@ -17,8 +17,8 @@ export const memberCountries: MemberCountry[] = [
 ];
 
 export const federationStats = [
-  { label: "Member Nations", value: 40, suffix: "+" },
-  { label: "Continents Represented", value: 6, suffix: "" },
-  { label: "Founded", value: 2017, suffix: "" },
-  { label: "Certified Referees", value: 250, suffix: "+" },
+  { label: "Member Nations", value: 10, suffix: "+" },
+  { label: "Continents Represented", value: 5, suffix: "" },
+  { label: "Founded", value: 2024, suffix: "" },
+  { label: "Certified Referees", value: 15, suffix: "+" },
 ];

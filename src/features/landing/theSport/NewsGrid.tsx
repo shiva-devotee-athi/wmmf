@@ -1,10 +1,14 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, Calendar } from "lucide-react";
-import { newsItems } from "@/data/news";
+import { newsItems, type NewsItem } from "@/data/news";
 import Image from "next/image";
+import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
+import type { NewsDoc } from "@/types/news";
+import Pagination from "@/components/common/Pagination";
 
 const container = {
   hidden: {},
@@ -21,60 +25,122 @@ const item = {
 };
 
 export default function NewsGrid() {
+  const [page, setPage] = useState(1);
+
+  const { items: firestoreDocs } = useFirestoreCollection<NewsDoc>("news");
+
+  const firestoreNews: NewsItem[] = firestoreDocs.map((doc) => {
+    const cleanSlug = doc.slug.replace(/^\/news\//, "");
+    return {
+      slug: cleanSlug,
+      title: doc.title,
+      subTitle: doc.subTitle,
+      content:
+        typeof doc.content === "string"
+          ? doc.content.split("\n\n").filter(Boolean)
+          : Array.isArray(doc.content)
+            ? doc.content
+            : [],
+      date: doc.date || new Date().toISOString(),
+      category: doc.category || "News",
+      image: "/images/banners/page-banner.webp",
+      tags:
+        typeof doc.tags === "string"
+          ? doc.tags
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : Array.isArray(doc.tags)
+            ? doc.tags
+            : [],
+    };
+  });
+
+  const allNews = firestoreNews.length > 0 ? firestoreNews : newsItems;
+
+  const pageSize = 12;
+  const totalPages = Math.ceil(allNews.length / pageSize);
+  const currentPage = Math.min(page, totalPages || 1);
+  const paginatedNews = allNews.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+
   return (
-    <motion.div
-      variants={container}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-10%" }}
-      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-    >
-      {newsItems.map((news) => (
-        <motion.div key={news.slug} variants={item} whileHover={{ y: -6 }}>
-          <article className="group flex h-full flex-col overflow-hidden rounded-[var(--card-corner-radius)] border border-black/[var(--card-border-opacity)] bg-white shadow-[var(--card-shadow-horizontal-offset)_var(--card-shadow-vertical-offset)_var(--card-shadow-blur-radius)_rgba(10,10,10,var(--card-shadow-opacity))] transition-shadow duration-200 hover:shadow-xl">
-            <div className="relative aspect-[16/10] overflow-hidden bg-secondary-100">
-              <Image
-                src={news.image}
-                alt={news.title}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
+    <div className="space-y-10">
+      <motion.div
+        key={currentPage}
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-10%" }}
+        className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+      >
+        {paginatedNews.map((news) => (
+          <motion.div key={news.slug} variants={item} whileHover={{ y: -6 }}>
+            <article className="group flex h-full flex-col overflow-hidden rounded-[var(--card-corner-radius)] border border-black/[var(--card-border-opacity)] bg-white shadow-[var(--card-shadow-horizontal-offset)_var(--card-shadow-vertical-offset)_var(--card-shadow-blur-radius)_rgba(10,10,10,var(--card-shadow-opacity))] transition-shadow duration-200 hover:shadow-xl">
+              <div className="relative aspect-[16/10] overflow-hidden bg-secondary-100">
+                {news.image ? (
+                  <Image
+                    src={news.image}
+                    alt={news.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-secondary-200 font-heading font-bold text-secondary-500">
+                    WMMF
+                  </div>
+                )}
 
-              <div className="absolute left-3 top-3 rounded-[var(--badge-corner-radius)] bg-primary-600 px-3 py-1 font-body text-[11px] font-semibold text-white">
-                {news.category}
+                <div className="absolute left-3 top-3 rounded-[var(--badge-corner-radius)] bg-primary-600 px-3 py-1 font-body text-[11px] font-semibold text-white">
+                  {news.category}
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-br from-secondary-700/20 to-secondary-900/40 transition-transform duration-300 group-hover:scale-105" />
               </div>
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary-700/20 to-secondary-900/40 transition-transform duration-300 group-hover:scale-105" />
-            </div>
 
-            <div className="flex flex-1 flex-col p-5">
-              <div className="flex items-center gap-1.5 font-body text-[12px] text-muted-foreground">
-                <Calendar className="h-3.5 w-3.5" />
-                <time dateTime={news.date}>
-                  {new Date(news.date).toLocaleDateString("en-US", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  })}
-                </time>
+              <div className="flex flex-1 flex-col p-5">
+                <div className="flex items-center gap-1.5 font-body text-[12px] text-muted-foreground">
+                  <Calendar className="h-3.5 w-3.5" />
+                  <time dateTime={news.date}>
+                    {isNaN(Date.parse(news.date))
+                      ? news.date
+                      : new Date(news.date).toLocaleDateString("en-US", {
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        })}
+                  </time>
+                </div>
+                <h2 className="mt-2 font-heading text-[17px] font-semibold leading-snug text-secondary-900 transition-colors group-hover:text-primary-600">
+                  {news.title}
+                </h2>
+                <p className="mt-2 line-clamp-3 font-body text-[13.5px] leading-relaxed text-muted-foreground">
+                  {news.subTitle}
+                </p>
+                <Link
+                  href={`/news/${news.slug}`}
+                  className="mt-4 inline-flex items-center gap-1.5 font-body text-[13.5px] font-semibold text-primary-600 transition-colors hover:text-primary-700"
+                >
+                  Learn more
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
               </div>
-              <h2 className="mt-2 font-heading text-[17px] font-semibold leading-snug text-secondary-900 transition-colors group-hover:text-primary-600">
-                {news.title}
-              </h2>
-              <p className="mt-2 line-clamp-3 font-body text-[13.5px] leading-relaxed text-muted-foreground">
-                {news.excerpt}
-              </p>
-              <Link
-                href={`/news/${news.slug}`}
-                className="mt-4 inline-flex items-center gap-1.5 font-body text-[13.5px] font-semibold text-primary-600 transition-colors hover:text-primary-700"
-              >
-                Learn more
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-          </article>
-        </motion.div>
-      ))}
-    </motion.div>
+            </article>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          totalItems={allNews.length}
+          pageSize={pageSize}
+        />
+      )}
+    </div>
   );
 }

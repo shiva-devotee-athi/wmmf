@@ -29,7 +29,7 @@ const jsonLd = {
   hasPart: newsItems.map((news) => ({
     "@type": "NewsArticle",
     headline: news.title,
-    description: news.excerpt,
+    description: news.subTitle,
     datePublished: news.date,
     url: `${siteConfig.url}/news/${news.slug}`,
     publisher: {

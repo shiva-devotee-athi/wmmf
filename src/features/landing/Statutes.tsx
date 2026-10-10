@@ -58,7 +58,7 @@ const Statutes: React.FC = () => {
           <DocumentCard
             title="WMMF Statutes"
             description="Original federation statutes establishing WMMF as the global governing body for mini mini football."
-            fileHref="/documents/wmmf-statutes.pdf"
+            fileUrl="/documents/wmmf-statutes.pdf"
             fileSize="1.2 MB"
           />
         </div>

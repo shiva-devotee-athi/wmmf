@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion } from "motion/react";
 import type { ReactNode } from "react";
+import { Globe2, Target } from "lucide-react";
 
 type Props = {
   eyebrow?: string;
@@ -45,12 +46,33 @@ export default function SplitContentLogo({
             {paragraphs.map((p, i) => (
               <p
                 key={i}
-                className="font-body text-[15px] leading-relaxed text-muted-foreground"
+                className="font-body text-[15px] leading-relaxed text-muted-foreground text-justify"
               >
                 {p}
               </p>
             ))}
           </div>
+
+          <div className="mt-7 flex flex-wrap items-center gap-10 sm:gap-50">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-600 text-white shadow-md shadow-primary-600/25">
+                <Target className="h-5 w-5" />
+              </div>
+              <span className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900">
+                Every Player Counts
+              </span>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary-600 text-white shadow-md shadow-primary-600/25">
+                <Globe2 className="h-5 w-5" />
+              </div>
+              <span className="font-heading text-[15px] font-bold uppercase tracking-wide text-secondary-900">
+                Every Touch Matters
+              </span>
+            </div>
+          </div>
+
           {children}
         </motion.div>
 

@@ -3,8 +3,10 @@
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowRight, Calendar } from "lucide-react";
-import { newsItems } from "@/data/news";
+import { newsItems, type NewsItem } from "@/data/news";
 import Image from "next/image";
+import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
+import type { NewsDoc } from "@/types/news";
 
 const container = {
   hidden: {},
@@ -21,12 +23,49 @@ const item = {
 };
 
 export default function NewsPreview() {
+  const { items: firestoreDocs } = useFirestoreCollection<NewsDoc>(
+    "news",
+    "createdAt",
+    "desc",
+  );
+
+  const firestoreNews: NewsItem[] = firestoreDocs.map((doc) => {
+    const cleanSlug = doc.slug.replace(/^\/news\//, "");
+    return {
+      slug: cleanSlug,
+      title: doc.title,
+      subTitle: doc.subTitle,
+      content:
+        typeof doc.content === "string"
+          ? doc.content.split("\n\n").filter(Boolean)
+          : Array.isArray(doc.content)
+            ? doc.content
+            : [],
+      date: doc.date || new Date().toISOString(),
+      category: doc.category || "News",
+      image: doc.image || "/images/banners/page-banner.webp",
+      tags:
+        typeof doc.tags === "string"
+          ? doc.tags
+              .split(",")
+              .map((t) => t.trim())
+              .filter(Boolean)
+          : Array.isArray(doc.tags)
+            ? doc.tags
+            : [],
+    };
+  });
+
+  const displayNews = (
+    firestoreNews.length > 0 ? firestoreNews : newsItems
+  ).slice(0, 3);
+
   return (
     <section className="relative overflow-hidden bg-white py-[var(--spacing-sections-mobile)] md:py-[var(--spacing-sections-desktop)]">
       {/* Background Drawing / Sketches Watermark */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.20]">
         <Image
-          src="/images/sketches/sketch_1.webp"
+          src="/images/sketches/sketch_3.webp"
           alt="Sports sketch background"
           fill
           className="object-cover object-center mix-blend-multiply"
@@ -61,20 +100,26 @@ export default function NewsPreview() {
           viewport={{ once: true, margin: "-10%" }}
           className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {newsItems.map((news) => (
+          {displayNews.map((news) => (
             <motion.div key={news.slug} variants={item} whileHover={{ y: -6 }}>
               <Link
                 href={`/news/${news.slug}`}
                 className="group block overflow-hidden rounded-2xl border border-slate-200/90 bg-white shadow-lg transition-all duration-300 hover:border-primary-500/30 hover:shadow-2xl"
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-secondary-100">
-                  <Image
-                    src={news.image}
-                    alt={news.title}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
+                  {news.image ? (
+                    <Image
+                      src={news.image}
+                      alt={news.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center bg-secondary-200 font-heading font-bold text-secondary-500">
+                      WMMF
+                    </div>
+                  )}
                   <div className="absolute left-3.5 top-3.5 rounded-full bg-primary-600 px-3.5 py-1 font-heading text-[11px] font-bold uppercase tracking-wider text-white shadow-md">
                     {news.category}
                   </div>
@@ -83,17 +128,19 @@ export default function NewsPreview() {
                 <div className="p-6">
                   <div className="flex items-center gap-1.5 font-body text-[12.5px] font-medium text-muted-foreground">
                     <Calendar className="h-3.5 w-3.5" />
-                    {new Date(news.date).toLocaleDateString("en-US", {
-                      day: "numeric",
-                      month: "short",
-                      year: "numeric",
-                    })}
+                    {isNaN(Date.parse(news.date))
+                      ? news.date
+                      : new Date(news.date).toLocaleDateString("en-US", {
+                          day: "numeric",
+                          month: "short",
+                          year: "numeric",
+                        })}
                   </div>
                   <h3 className="mt-2.5 font-heading text-[18px] font-bold uppercase leading-snug text-secondary-950 transition-colors group-hover:text-primary-600">
                     {news.title}
                   </h3>
                   <p className="mt-2.5 line-clamp-2 font-body text-[13.5px] leading-relaxed text-muted-foreground">
-                    {news.excerpt}
+                    {news.subTitle}
                   </p>
                 </div>
               </Link>

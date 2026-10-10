@@ -29,7 +29,7 @@ export default function DocumentGrid({
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: "-10%" }}
-      className="flex flex-col gap-4"
+      className="flex flex-col gap-4 mt-10"
     >
       {documents.map((doc) => (
         <motion.div key={doc.title} variants={item}>

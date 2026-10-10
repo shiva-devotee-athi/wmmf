@@ -8,7 +8,7 @@ import AnimatedTabs from "@/components/common/AnimatedTabs";
 import DataTable, { type Column } from "@/features/admin/components/DataTable";
 import FormModal from "@/features/admin/components/FormModal";
 import FormField from "@/features/admin/components/FormField";
-import ImageUploader from "@/features/admin/components/ImageUploader";
+import FileUploader from "@/features/admin/components/FileUploader";
 import {
   useFirestoreCollection,
   type WithId,
@@ -105,6 +105,7 @@ function PhotosTab() {
         rows={items}
         loading={loading}
         emptyLabel="No photos yet."
+        pageSize={16}
         onEdit={openEdit}
         onDelete={handleDelete}
       />
@@ -139,7 +140,7 @@ function PhotosTab() {
             value={form.alt}
             onChange={(e) => setForm((f) => ({ ...f, alt: e.target.value }))}
           />
-          <ImageUploader
+          <FileUploader
             label="Photo"
             value={form.imageUrl}
             folder="wmmf/media"
@@ -248,6 +249,7 @@ function VideosTab() {
         rows={items}
         loading={loading}
         emptyLabel="No videos yet."
+        pageSize={16}
         onEdit={openEdit}
         onDelete={handleDelete}
       />

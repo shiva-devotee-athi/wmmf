@@ -14,7 +14,8 @@ export const siteConfig = {
     "6-a-side football",
     "mini soccer",
   ],
-  email: "info@wmmf.org",
+  primary_email: "info@wmmf.org",
+  secondary_email: "secretarygeneral@wmmf.info",
   phone: "+91 7373677436",
   address: "Salem, Tamil Nadu, India",
   social: {

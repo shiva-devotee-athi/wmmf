@@ -10,33 +10,33 @@ const features = [
     icon: Zap,
     title: "Develop the Sport",
     description:
-      "Standardizing dynamic gameplay and expanding small-sided football globally.",
+      "Establishing consistent standards for World Mini Mini Football and creating opportunities for the sport to grow across communities and countries.",
     list: [
-      "Standardize the Rules",
-      "Promote Global Participation",
-      "Youth & Grassroots Programs",
+      "Unified Rules & Standards",
+      "Global & Grassroots Participation",
+      "Youth Development Programs",
     ],
   },
   {
     icon: Globe2,
     title: "Educate & Certify",
     description:
-      "Empowering officials, coaches, and leaders with international certification.",
+      "Developing qualified referees, coaches, and sport leaders through structured education and internationally recognized certification.",
     list: [
-      "Referee Education & Badges",
-      "Coach Development Tracks",
-      "Workshops & Seminars",
+      "Referee Education & Certification",
+      "Coach Development & Training",
+      "Technical Workshops & Seminars",
     ],
   },
   {
     icon: Scale,
     title: "Organize & Support",
     description:
-      "Sanctioning tournaments and providing administrative guidance to member nations.",
+      "Supporting Member Associations and delivering structured competitions within a clear international framework of governance and fair play.",
     list: [
       "International Competitions",
-      "Member Nation Development",
-      "Statutes & Fair Play",
+      "Member Association Development",
+      "Governance, Statutes & Fair Play",
     ],
   },
 ];
@@ -75,7 +75,7 @@ export default function WhatWeDo() {
       {/* Background Drawing / Sketches Watermark */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.20]">
         <Image
-          src="/images/sketches/sketch_1.webp"
+          src="/images/sketches/sketch_2.webp"
           alt="Sports sketch background"
           fill
           className="object-cover object-center mix-blend-multiply"
@@ -122,8 +122,8 @@ export default function WhatWeDo() {
             variants={titleItem}
             className="mx-auto mt-4 font-body text-[15px] leading-relaxed text-muted-foreground"
           >
-            Building the future of Mini Mini Football with robust international
-            governance.
+            WMMF is committed to building the future of World Mini Mini Football through clear standards,
+            strong governance, education, and international development.
           </motion.p>
         </motion.div>
 

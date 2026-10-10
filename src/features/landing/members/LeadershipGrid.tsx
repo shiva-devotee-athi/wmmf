@@ -6,10 +6,13 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { leadershipMembers, type LeadershipMember } from "@/data/leadership";
 import MemberModal from "./MemberModal";
+import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
+import type { MemberDoc } from "@/types/member";
+import Pagination from "@/components/common/Pagination";
 
 const container = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
+  visible: { transition: { staggerChildren: 0.08 } },
 };
 
 const item = {
@@ -23,6 +26,34 @@ const item = {
 
 export default function LeadershipGrid() {
   const [active, setActive] = useState<LeadershipMember | null>(null);
+  const [page, setPage] = useState(1);
+
+  const { items: firestoreDocs, loading } =
+    useFirestoreCollection<MemberDoc>("members");
+
+  const firestoreMembers: LeadershipMember[] = firestoreDocs.map((m) => ({
+    id: m.id,
+    name: m.name,
+    role: m.role,
+    image: m.image,
+    bio:
+      typeof m.bio === "string"
+        ? m.bio.split("\n\n").filter(Boolean)
+        : Array.isArray(m.bio)
+          ? m.bio
+          : [],
+  }));
+
+  const allMembers =
+    firestoreMembers.length > 0 ? firestoreMembers : leadershipMembers;
+
+  const pageSize = 12;
+  const totalPages = Math.ceil(allMembers.length / pageSize);
+  const currentPage = Math.min(page, totalPages || 1);
+  const paginatedMembers = allMembers.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
 
   return (
     <section
@@ -61,13 +92,14 @@ export default function LeadershipGrid() {
         </div>
 
         <motion.div
+          key={currentPage}
           variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-10%" }}
           className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4"
         >
-          {leadershipMembers.map((member) => (
+          {paginatedMembers.map((member) => (
             <motion.button
               key={member.id}
               type="button"
@@ -77,13 +109,19 @@ export default function LeadershipGrid() {
               className="group text-left"
             >
               <div className="relative aspect-[253/300] overflow-hidden rounded-[var(--card-corner-radius)] border border-black/[var(--card-border-opacity)] bg-muted shadow-[var(--card-shadow-horizontal-offset)_var(--card-shadow-vertical-offset)_var(--card-shadow-blur-radius)_rgba(10,10,10,var(--card-shadow-opacity))]">
-                <Image
-                  src={member.image}
-                  alt={member.name}
-                  fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                />
+                {member.image ? (
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-secondary-100 font-heading text-xl font-bold text-secondary-500">
+                    {member.name.charAt(0)}
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-secondary-950/60 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100" />
               </div>
               <h3 className="mt-4 font-heading text-[16px] font-semibold text-secondary-900 transition-colors group-hover:text-primary-600">
@@ -95,6 +133,18 @@ export default function LeadershipGrid() {
             </motion.button>
           ))}
         </motion.div>
+
+        {totalPages > 1 && (
+          <div className="mt-10">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={setPage}
+              totalItems={allMembers.length}
+              pageSize={pageSize}
+            />
+          </div>
+        )}
       </div>
 
       <MemberModal member={active} onClose={() => setActive(null)} />

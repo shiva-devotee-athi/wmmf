@@ -1,7 +1,7 @@
 export type NewsItem = {
   slug: string;
   title: string;
-  excerpt: string;
+  subTitle: string;
   content: string[];
   date: string;
   category: string;
@@ -13,7 +13,7 @@ export const newsItems: NewsItem[] = [
   {
     slug: "first-wmmf-demonstration-pune-india",
     title: "First World Mini Mini Football Demonstration Held in Pune, India",
-    excerpt:
+    subTitle:
       "The World Mini Mini Football (WMMF) successfully staged its first-ever demonstration event in Pune, India, showcasing the fast-paced 3-on-3 format to local players, coaches, and officials.",
     content: [
       "The World Mini Mini Football (WMMF) successfully staged its first-ever demonstration event in Pune, India, introducing players, coaches, and spectators to an exciting new format of football.",
@@ -35,7 +35,7 @@ export const newsItems: NewsItem[] = [
   {
     slug: "wmmf-debut-in-india",
     title: "World Mini Mini Football Makes Its Debut in India",
-    excerpt:
+    subTitle:
       "The arrival of World Mini Mini Football (WMMF) in India marked an important milestone in the Federation's global expansion and grassroots development efforts.",
     content: [
       "The arrival of World Mini Mini Football (WMMF) in India marked an important milestone in the Federation's global expansion and grassroots development efforts.",
@@ -52,7 +52,7 @@ export const newsItems: NewsItem[] = [
     slug: "first-referee-seminar-pune",
     title:
       "WMMF Successfully Conducts Its First Referee Seminar in Pune, India",
-    excerpt:
+    subTitle:
       "Participation in mini football continues to grow with strong community support as WMMF trains its first cohort of certified match officials.",
     content: [
       "Participation in mini football continues to grow with strong community support as WMMF trains its first cohort of certified match officials in Pune, India.",
@@ -64,5 +64,296 @@ export const newsItems: NewsItem[] = [
     category: "Development",
     image: "/images/news/news_3.webp",
     tags: ["Referees", "Education"],
+  },
+  {
+    slug: "secretary-general",
+    title: "WMMF Shortlists Two Candidates for Secretary General",
+    subTitle:
+      "Final Selection Expected as WMMF Prepares to Appoint Its Secretary General.",
+    content: [
+      "World Mini Mini Football (WMMF) is moving closer to appointing its Secretary General, with two candidates now shortlisted for the position.",
+      "Following discussions and consideration of candidates with relevant international sports administration and organizational experience, the selection process has been narrowed to two individuals. Both candidates are being considered for their ability to contribute to WMMF’s administrative development and support the organization as it expands its international network.",
+      "The Secretary General will play an important role in the day-to-day coordination of WMMF, working with the organization’s leadership and Member Associations while supporting the development of international programs, competitions, education, and administrative structures.",
+      "The final decision is expected to be made following further discussions and consideration of the two shortlisted candidates.",
+      "WMMF will announce the appointment once the selection process has been completed and the new Secretary General has been formally confirmed.",
+    ],
+    date: "2025-12-15",
+    category: "Announcement",
+    image: "/images/news/news_3.webp",
+    tags: ["Secretary General", "Announcement"],
+  },
+  {
+    slug: "kiarash-bahri",
+    title: "Kiarash Bahri Appointed WMMF’s First Secretary General",
+    subTitle:
+      "International Sports Administrator Brings Extensive Governance, Competition, and Federation Experience to WMMF",
+    content: [
+      "World Mini Mini Football (WMMF) is pleased to announce the appointment of Mr. Kiarash Bahri as Secretary General of World Mini Mini Football.",
+      "Mr. Bahri brings extensive international sports administration experience to the position, having held senior leadership and management roles across Asian and international sport for many years.",
+      "His international career includes serving as Deputy Secretary General of the Asian Taekwondo Union (ATU) and Secretary General of the West Asian Taekwondo Union, where he was involved in the administration and development of taekwondo across the region. He also served as Competition Manager at the 2017 Asian Indoor and Martial Arts Games, contributing to the organization and management of a major multi-sport international event.",
+      "For many years, Mr. Bahri served as International Director of the Iranian national federations for Taekwondo, Judo, Rowing, and Equestrian, working extensively on international relations, federation cooperation, events, and sports administration.",
+      "His experience also includes participation in a number of important international committees and commissions. Among these were the ATU Statute Revision Committee, which worked on the review and rewriting of the Union’s governing statutes, as well as the 2010 Asian Games Investigation Committee. He has also held a range of other responsibilities within international sports organizations and committees, working with federations and sporting bodies across Asia and beyond.",
+      "Looking Ahead: Expanding WMMF Internationally",
+      "As Secretary General, Mr. Bahri will focus on helping WMMF build a stronger international presence and establish the foundations for the sport’s long-term expansion.",
+      "His priorities include expanding the WMMF network of Member Associations, developing stronger regional structures, establishing national development programs, and creating pathways for clubs, players, coaches, and referees to become part of the international WMMF system.",
+      "He will also work toward strengthening international cooperation, supporting the establishment of WMMF activities in new countries, and developing a coordinated pathway from grassroots participation to national and international competitions.",
+      "With his background in international federation relations and sports administration, Mr. Bahri aims to help WMMF move into its next phase of development — from establishing the organization internationally to building a connected global football community around World Mini Mini Football.",
+      "WMMF welcomes Mr. Kiarash Bahri as Secretary General and looks forward to his contribution as the organization continues to expand World Mini Mini Football into new countries, communities, and generations of players.",
+    ],
+    date: "2026-01-10",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["Leadership", "Appointment"],
+  },
+  {
+    slug: "executive-board",
+    title: "WMMF Moves to Establish Executive Board",
+    subTitle:
+      "Vice President Appointments to Form the Foundation of WMMF’s Executive Board",
+    content: [
+      "World Mini Mini Football (WMMF) is preparing to begin forming its Executive Board, with the appointment of Vice Presidents expected to be the next step in strengthening the organization’s international leadership structure.",
+      "As WMMF expands its network of Member Associations and prepares for a growing program of national and international activities, the establishment of an Executive Board will provide a broader leadership structure to support the organization’s development.",
+      "WMMF is considering candidates with experience across international sport, football, administration, governance, development, and other areas relevant to the growth of the game. Vice Presidents will support the organization’s leadership and contribute to specific areas of WMMF’s international development and expansion.",
+      "The formation of the Executive Board is expected to develop progressively, with further appointments to follow as WMMF’s international network and activities continue to grow.",
+      "The new structure will support WMMF in coordinating its Member Associations, developing international programs and competitions, strengthening education and officiating, and expanding World Mini Mini Football into new countries and communities.",
+      "The planned appointments represent another step in WMMF’s transition from establishing its international organization to building the leadership structure needed for its next phase of global expansion.",
+    ],
+    date: "2026-01-17",
+    category: "Development",
+    image: "/images/news/news_3.webp",
+    tags: ["Leadership", "Announcement"],
+  },
+  {
+    slug: "neil-zodage-appointed-wmmf-vice-president",
+    title: "Neil Zodage Appointed WMMF Vice President",
+    subTitle:
+      "Football Background and International Business Experience Strengthen WMMF’s Leadership Team",
+    content: [
+      "World Mini Mini Football (WMMF) has appointed Neil Zodage of Pune, Maharashtra, as Vice President of WMMF, adding football experience and an international business perspective to the organization’s growing leadership team.",
+      "Zodage has a longstanding connection with football, having played the game as a goalkeeper and later continued his football experience through amateur competition in England. His playing background has given him first-hand experience of the discipline, teamwork, decision-making, and competitive environment that define the sport.",
+      "Alongside his sporting background, Zodage holds a Bachelor of Arts degree in International Hospitality and Tourism, providing an international academic foundation that complements his professional experience.",
+      "He is also actively involved in the management and expansion of his family business, which has grown from its origins in the restaurant sector into the hotel industry. His experience in hospitality, business development, management, and customer-focused operations provides an additional perspective that can support WMMF as the organization develops its international activities.",
+      "As Vice President, Zodage will support and assist WMMF in its continued development, particularly as the organization expands its presence in India and builds opportunities for Mini Mini Football at club, community, and international levels.",
+      "His combination of football experience, international education, and business management adds another dimension to WMMF’s expanding leadership team as the organization continues to develop the sport and its global network.",
+      "WMMF welcomes Neil Zodage as Vice President and looks forward to his support in taking Mini Mini Football to new players, communities, and opportunities in India and beyond.",
+    ],
+    date: "2026-01-20",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["Leadership", "Appointment"],
+  },
+  {
+    slug: "united-kingdom-joins-wmmf-as-dr-sacha-molla-appointed-vice-president",
+    title:
+      "United Kingdom Joins WMMF as Dr. Sacha Molla Appointed Vice President",
+    subTitle:
+      "Football and Healthcare Leader Brings High-Performance and Organisational Experience to WMMF",
+    content: [
+      "World Mini Mini Football (WMMF) has welcomed the United Kingdom into its growing international network, alongside the appointment of Dr. Sacha Molla as Vice President of WMMF.",
+      "Dr. Molla brings a distinctive combination of football, high-performance sport, healthcare leadership, and organisational experience to his new role. He previously worked as a Physiotherapist at the Leicester City Football Academy, supporting the development of young elite players, helping them maximise performance, and contributing to injury prevention.",
+      "His experience also extends beyond football, having worked at world level in Taekwondo, giving him further insight into the physical, technical, and professional demands of international sport.",
+      "Dr. Molla currently serves as a Pain Service Lead within one of the largest musculoskeletal healthcare contracts in the United Kingdom, where he leads multidisciplinary teams, develops clinical pathways, and supports the delivery of large-scale healthcare services. His work in strategic leadership, governance, and service transformation has provided extensive experience in managing complex organisations and developing sustainable systems.",
+      "As Vice President of WMMF, Dr. Molla will support the organization’s efforts to promote the development of World Mini Mini Football internationally, with a particular focus on high standards, player welfare, professional development, innovation, and inclusive participation.",
+      "His background in elite sport and healthcare also brings an important perspective to WMMF’s development as the organization continues to establish its international structure and expand opportunities for players, coaches, officials, and Member Associations.",
+      "The appointment comes as WMMF continues to build its presence in Europe, with the United Kingdom becoming part of the organization’s expanding international community.",
+      "WMMF warmly welcomes Dr. Sacha Molla as Vice President and the United Kingdom to its growing international network, wishing Dr. Molla every success as he supports the continued development and international expansion of World Mini Mini Football.",
+    ],
+    date: "2026-02-01",
+    category: "Development",
+    image: "/images/news/news_3.webp",
+    tags: ["Announcement", "UK"],
+  },
+  {
+    slug: "pune-india-joins-wmmf-as-member-association",
+    title: "Pune, India Joins World Mini Mini Football",
+    subTitle:
+      "World Mini Mini Football (WMMF) is pleased to welcome Pune, India, as a Member Association of WMMF.",
+    content: [
+      "The affiliation marks another important step in the continued expansion of World Mini Mini Football in India and strengthens WMMF’s growing network of Member Associations across the country.",
+      "World Mini Mini Football Pune will serve as the recognized WMMF Member Association for Pune, supporting the introduction, organization, and development of the sport in accordance with WMMF’s official rules, standards, and governance framework.",
+      "Pune has a strong sporting culture and an active football community, providing a valuable environment for the development of Mini Mini Football. The affiliation will create opportunities to introduce the sport to clubs, schools, academies, coaches, referees, players, and local communities throughout the city and surrounding areas.",
+      "WMMF’s development model emphasizes accessibility, participation, and grassroots growth. Through its Member Associations, WMMF seeks to establish structured opportunities for player development, coaching and referee education, club development, and the organization of local and regional competitions.",
+      "The affiliation of Pune represents another step in WMMF’s commitment to expanding the sport internationally and bringing the fast, accessible, and exciting format of World Mini Mini Football to new players and communities.",
+      "WMMF warmly welcomes World Mini Mini Football Pune to the WMMF family and looks forward to working together to develop and promote the sport throughout Pune and contribute to the continued growth of World Mini Mini Football in India.",
+    ],
+    date: "2026-07-02",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["Pune", "India"],
+  },
+  {
+    slug: "world-mini-mini-football-makes-its-debut-in-india",
+    title: "World Mini Mini Football Makes Its Debut in India",
+    subTitle: "Pune Hosts WMMF’s Arrival on the Indian Football Scene",
+    content: [
+      "World Mini Mini Football (WMMF) made its Indian debut in Pune, bringing local players, coaches, and sports representatives together to experience the Federation’s 3-on-3 format.",
+      "The Pune program began with an overview of the WMMF rules, playing dimensions, equipment, player roles, and core principles of the game. Participants examined the format before moving onto the court, where they could see how its rules and playing principles translate into match situations.",
+      "The program then moved into competitive action, with four teams taking part in a WMMF demonstration event. None of the players had previously played World Mini Mini Football, making the matches a genuine test of how quickly players could adapt to the format. As the games progressed, the teams adjusted to the compact playing area, rapid transitions, and the greater involvement required from every player.",
+      "Coaches also took part in a dedicated seminar covering the technical and tactical demands of 3-on-3 football, while referees and officials worked through WMMF’s rules and officiating requirements. Together, the sessions provided a practical foundation for coach education, referee training, and player development.",
+      "The Pune activities marked the beginning of WMMF’s organized presence in India and demonstrated the potential for the format to move from learning to competitive play within a single program. The Federation now plans to build on this work through further coaching activities, referee education, grassroots development, and competitions across the country.",
+    ],
+    date: "2026-07-02",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["Pune", "Debut"],
+  },
+  {
+    slug: "world-mini-mini-football-makes-its-debut-in-india",
+    title: "World Mini Mini Football Makes Its Debut in India",
+    subTitle: "Pune Hosts WMMF’s Arrival on the Indian Football Scene",
+    content: [
+      "World Mini Mini Football (WMMF) made its Indian debut in Pune, bringing local players, coaches, and sports representatives together to experience the Federation’s 3-on-3 format.",
+      "The Pune program began with an overview of the WMMF rules, playing dimensions, equipment, player roles, and core principles of the game. Participants examined the format before moving onto the court, where they could see how its rules and playing principles translate into match situations.",
+      "The program then moved into competitive action, with four teams taking part in a WMMF demonstration event. None of the players had previously played World Mini Mini Football, making the matches a genuine test of how quickly players could adapt to the format. As the games progressed, the teams adjusted to the compact playing area, rapid transitions, and the greater involvement required from every player.",
+      "Coaches also took part in a dedicated seminar covering the technical and tactical demands of 3-on-3 football, while referees and officials worked through WMMF’s rules and officiating requirements. Together, the sessions provided a practical foundation for coach education, referee training, and player development.",
+      "The Pune activities marked the beginning of WMMF’s organized presence in India and demonstrated the potential for the format to move from learning to competitive play within a single program. The Federation now plans to build on this work through further coaching activities, referee education, grassroots development, and competitions across the country.",
+    ],
+    date: "2026-07-02",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["Pune", "Debut"],
+  },
+  {
+    slug: "wmmf-introduces-world-mini-mini-football-to-coaches-in-pune-india",
+    title: "WMMF Introduces World Mini Mini Football to Coaches in Pune, India",
+    subTitle: "The First WMMF Introductory Seminar Opens a New Chapter in Pune",
+    content: [
+      "World Mini Mini Football (WMMF) has successfully conducted its first introductory seminar for coaches in Pune, India, bringing coaches together to discover the game, understand its unique 3-on-3 format, and explore the opportunities it offers for players, clubs, and communities.",
+      "The seminar provided participants with an introduction to the philosophy, structure, and fundamental principles of World Mini Mini Football. Coaches were introduced to the official WMMF rules, playing format, key technical and tactical concepts, and the demands of a game built around speed, creativity, quick decision-making, and continuous player involvement.",
+      "More than simply presenting the rules, the seminar gave coaches a first-hand introduction to how WMMF is played and coached. Through the presentation and practical discussion of the 3-on-3 format, participants explored player positioning, attacking and defensive responsibilities, transitions, use of space, and the importance of quick decisions in a compact playing environment. The session also highlighted how the smaller format can create different coaching challenges and opportunities, requiring coaches to adapt traditional football concepts to a faster and more concentrated game.",
+      "A particular point of interest was the WMMF shoot-out, through which coaches were introduced to the sport’s distinctive approach to penalty shoot-outs. The innovative format generated a strong response from participants, who welcomed the concept and highlighted its potential to add greater excitement, skill, and competition to decisive moments of the game.",
+      "For the participating coaches, the seminar offered an opportunity to experience the rush of World Mini Mini Football while gaining a clearer understanding of the principles behind the sport and how they can be applied in training and competition. It marked the beginning of WMMF’s coach education pathway in Pune and an important step toward introducing the game to more players, clubs, and football communities across India.",
+    ],
+    date: "2026-07-02",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["Pune", "India", "Maharashtra"],
+  },
+  {
+    slug: "first-demonstration-in-india",
+    title: "First World Mini Mini Football Demonstration Held in Pune, India",
+    subTitle: "WMMF Makes Its First Competitive Appearance in India",
+    content: [
+      "World Mini Mini Football (WMMF) made its first competitive appearance in Pune, India, with a demonstration event that introduced players, coaches, and spectators to the distinctive 3-on-3 format and fast-paced character of the game.",
+      "Four teams took part in the historic demonstration, becoming the first players in India to experience World Mini Mini Football in competitive play. With no previous experience of the format and unfamiliar with its rules, the players entered the opening match with curiosity and caution as they began to discover the demands of the game.",
+      "The first minutes were a period of adjustment. Players had to quickly adapt to the compact playing area, the pace of the game, and the official WMMF ball, whose size immediately attracted attention. As the match developed, however, the initial uncertainty gave way to a growing understanding of the game's rhythm and playing principles.",
+      "The players soon began to recognize that the 3-on-3 format places very different demands on those taking part. With fewer players on the court, there is little opportunity to remain on the edge of the action. Passing, movement, positioning, defending, and decision-making become immediate responsibilities, while transitions can change the direction of the game in seconds.",
+      "As the teams became more familiar with the rules, the matches grew faster and more competitive. Players began finding space, combining more confidently, and making quicker decisions under pressure. The continuous action and high level of involvement created an energetic atmosphere for both players and spectators.",
+      "The demonstration also provided an important opportunity to see how WMMF differs from other established forms of small-sided football. While drawing on the long tradition of small-sided football, WMMF brings together its own playing format, rules, dimensions, and competition principles to create a distinct football experience.",
+      "For the players, what began as an unfamiliar format quickly became an engaging and competitive challenge. For coaches and officials, the event provided a first opportunity to observe the game in practice and consider its potential for player development, coaching, and organized competition.",
+      "The Pune demonstration marked an important milestone in the development of World Mini Mini Football in India and established a foundation for the introduction of WMMF coaching and referee education, club development, and future competitions.",
+      "From its first kick in Pune, the game has begun its journey toward a wider Indian and international audience.",
+    ],
+    date: "2026-07-02",
+    category: "News",
+    image: "/images/news/news_3.webp",
+    tags: ["Pune", "India", "Maharashtra"],
+  },
+  {
+    slug: "united-states-joins-wmmf",
+    title:
+      "United States Joins WMMF as S. Cristal Khalat Bari Appointed Vice President",
+    subTitle:
+      "American Educator and Former Football Player Brings Leadership and Football Experience to WMMF",
+    content: [
+      "World Mini Mini Football (WMMF) has welcomed the United States into its growing international network, alongside the appointment of S. Cristal Khalat Bari of Tyler, Texas, as Vice President of WMMF.",
+      "Ms. Khalat Bari brings extensive leadership experience, a strong commitment to education and community development, and a lifelong passion for football. She currently serves as a Dean of Instruction with Tyler Independent School District, contributing to the leadership of a school community of approximately 800 students and more than 100 employees.",
+      "Her connection to football began at an early age. She started playing competitively at the age of four and continued through the age of eighteen, including competitive club football that took her throughout the region and beyond. Her experience in the sport helped develop her understanding of teamwork, discipline, leadership, commitment, and perseverance.",
+      "Throughout her professional career, Ms. Khalat Bari has demonstrated a strong commitment to education, leadership, and helping others reach their full potential. These qualities closely align with WMMF’s commitment to making Mini Mini Football accessible and inclusive for players and communities around the world.",
+      "Her combination of professional leadership, educational experience, and football background adds valuable expertise to WMMF as the organization continues to develop its international structure and expand the sport into new communities.",
+      "The United States joining WMMF marks an important step in the organization’s growing presence in North America and creates new opportunities to develop Mini Mini Football among players, clubs, schools, and communities across the country.",
+      "WMMF welcomes S. Cristal Khalat Bari as Vice President and looks forward to her support in the continued development and international growth of Mini Mini Football.",
+    ],
+    date: "2026-07-02",
+    category: "Milestone",
+    image: "/images/news/news_3.webp",
+    tags: ["USA", "Cristal Khalat Bari", "World Mini Mini Football"],
+  },
+  {
+    slug: "tamil-nadu-joins-wmmf",
+    title: "Tamil Nadu, India Joins World Mini Mini Football",
+    subTitle:
+      "World Mini Mini Football (WMMF) is pleased to welcome Tamil Nadu, India, as a Member Association of WMMF.",
+    content: [
+      "The affiliation marks an important step in the continued expansion of World Mini Mini Football in India and strengthens WMMF’s growing international network of Member Associations.",
+      "World Mini Mini Football Tamil Nadu will serve as the recognized WMMF Member Association for the state of Tamil Nadu, supporting the introduction, organization, and development of the sport in accordance with WMMF’s official rules, standards, and governance framework.",
+      "With its strong sporting culture, extensive youth population, and active football community, Tamil Nadu provides a valuable environment for the development of Mini Mini Football. The affiliation creates opportunities for the sport to be introduced to clubs, schools, academies, coaches, referees, players, and communities across the state.",
+      "WMMF’s development model is built around accessibility, participation, and the growth of the sport at the grassroots level. Through its Member Associations, WMMF seeks to establish structured pathways for player development, coaching and referee education, club development, and the organization of local and regional competitions.",
+      "The affiliation of World Mini Mini Football Tamil Nadu marks another step in WMMF’s international development, creating new opportunities to promote the sport, develop players and communities, and expand its presence across India.",
+      "WMMF welcomes World Mini Mini Football Tamil Nadu and looks forward to working together to develop the game throughout Tamil Nadu and across India.",
+    ],
+    date: "2026-09-20",
+    category: "News",
+    image: "/images/news/news_3.webp",
+    tags: ["Tamil Nadu", "India"],
+  },
+  {
+    slug: "iraq-receives-wmmf-letter-of-intent",
+    title: "Iraq Receives WMMF Letter of Intent Toward Membership",
+    subTitle: "",
+    content: [
+      "World Mini Mini Football (WMMF) has issued a Letter of Intent to Iraq following the country’s formal application to join the international WMMF network.",
+      "The Letter of Intent marks an important initial step in the process toward establishing WMMF representation in Iraq and developing Mini Mini Football within the country.",
+      "Through the proposed cooperation, Iraq will have the opportunity to support the development of players, coaches and referees, organize competitions and contribute to the international growth of the sport.",
+      "The next stages will involve completing the required membership and administrative procedures in accordance with WMMF regulations.",
+      "WMMF welcomes Iraq’s interest and looks forward to supporting the development of Mini Mini Football in the country and building a strong foundation for future cooperation.",
+    ],
+    date: "2026-09-25",
+    category: "News",
+    image: "/images/news/news_3.webp",
+    tags: ["Iraq", "World Mini Mini Football"],
+  },
+  {
+    slug: "wmmf-holds-discussions-on-appointment-of-president",
+    title: "WMMF Holds Discussions on Appointment of President",
+    subTitle: "Three Candidates Under Consideration for WMMF Presidency",
+    content: [
+      "World Mini Mini Football (WMMF) has begun discussions on the appointment of a President of the organization, with three candidates currently being considered for the position.",
+      "The discussions are focused on identifying a candidate who can contribute to the continued international development of World Mini Mini Football and help strengthen WMMF’s growing network of Member Associations.",
+      "The Presidency will have an important role within WMMF’s leadership structure, particularly in representing the organization internationally, supporting relations with Member Associations and international sporting bodies, and contributing to the strategic development of the sport.",
+      "The three candidates bring different backgrounds and areas of experience to the discussions. WMMF is currently considering their qualifications, international experience, and potential contribution to the organization before a final decision is reached.",
+      "No appointment has yet been made, and discussions remain ongoing.",
+      "WMMF is expected to announce the outcome once the selection process has been completed and the appointment has been formally confirmed.",
+    ],
+    date: "2026-10-02",
+    category: "Announcement",
+    image: "/images/news/news_3.webp",
+    tags: ["President", "WMMF", "Leadership"],
+  },
+  {
+    slug: "five-more-countries-apply-to-join-wmmf",
+    title: "Five More Countries Apply to Join WMMF",
+    subTitle:
+      "Growing International Interest Brings New Membership Applications Across Three Continents",
+    content: [
+      "World Mini Mini Football (WMMF) has received membership applications from Indonesia, Pakistan, South Korea, the Netherlands, and Mexico, adding further momentum to the sport’s international expansion.",
+      "The latest applications extend WMMF’s reach across Asia, Europe, and North America, with representatives from each country now engaged in discussions with the organization regarding membership and the development of World Mini Mini Football at national and grassroots levels.",
+      "The talks are covering the practical steps required to establish WMMF activities locally, including the formation of national structures, club and player development, coach and referee education, and future competitions.",
+      "The interest comes as WMMF continues to build its international network and establish the organizational framework needed to support the sport in different football environments. For the prospective Member Associations, joining WMMF would provide a common set of rules, competition standards, education programs, and an international structure through which to develop the game.",
+      "The applications are currently under review, with formal membership subject to completion of the WMMF affiliation process and all applicable requirements.",
+      "The latest developments reflect growing international interest in World Mini Mini Football and add five new countries to WMMF’s expanding network of prospective Member Associations.",
+    ],
+    date: "2026-10-04",
+    category: "News",
+    image: "/images/news/news_3.webp",
+    tags: ["Indonesia", "Pakistan", "South Korea", "Netherlands", "Mexico"],
+  },
+  {
+    slug: "2027-set-to-be-a-major-year-for-wmmf",
+    title: "2027 Set to Be a Major Year for WMMF",
+    subTitle:
+      "National Events, International Championships and the First WMMF World Championships on the Horizon",
+    content: [
+      "2027 is set to be a landmark year for World Mini Mini Football (WMMF) as Member Associations prepare to stage national events while WMMF develops an international competition calendar culminating in the organization’s first WMMF World Championships.",
+      "Across the growing WMMF network, Member Associations are preparing to organize national tournaments, demonstrations, coaching activities, and development programs throughout the year. These events will provide players and clubs with more opportunities to compete while giving national structures a platform to develop the sport within their own communities.",
+      "At international level, WMMF is also planning a series of international championships, creating opportunities for teams from different countries to meet in official competition and experience the game at an international level.",
+      "The centerpiece of the 2027 calendar will be the inaugural WMMF World Championships. The event will represent a major step in the development of the sport, bringing together teams from across the WMMF network to compete for the first world title in World Mini Mini Football.",
+      "The applications are currently under review, with formal membership subject to completion of the WMMF affiliation process and all applicable requirements.",
+      "The latest developments reflect growing international interest in World Mini Mini Football and add five new countries to WMMF’s expanding network of prospective Member Associations.",
+    ],
+    date: "2026-10-04",
+    category: "Announcement",
+    image: "/images/news/news_3.webp",
+    tags: ["2027", "World Championships"],
   },
 ];

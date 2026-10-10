@@ -19,7 +19,7 @@ const Logo: React.FC<LogoProps> = ({
   const content = (
     <div className="flex items-center gap-3">
       <Image
-        src="/images/logo.png"
+        src="/images/logos/logo.png"
         alt="wmmc-logo"
         width={width}
         height={height}

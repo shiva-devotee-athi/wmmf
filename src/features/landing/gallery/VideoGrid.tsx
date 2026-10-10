@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Play, X } from "lucide-react";
 import Skeleton from "@/components/common/Skeleton";
 import type { MediaVideo } from "@/data/media";
+import Pagination from "@/components/common/Pagination";
 
 function VideoTile({
   video,
@@ -52,12 +53,21 @@ function VideoTile({
 }
 
 export default function VideoGrid({ videos }: { videos: MediaVideo[] }) {
+  const [page, setPage] = useState(1);
   const [active, setActive] = useState<MediaVideo | null>(null);
 
+  const pageSize = 16;
+  const totalPages = Math.ceil(videos.length / pageSize);
+  const currentPage = Math.min(page, totalPages || 1);
+  const paginatedVideos = videos.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize,
+  );
+
   return (
-    <>
+    <div className="space-y-8">
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {videos.map((video) => (
+        {paginatedVideos.map((video) => (
           <VideoTile
             key={video.id}
             video={video}
@@ -65,6 +75,16 @@ export default function VideoGrid({ videos }: { videos: MediaVideo[] }) {
           />
         ))}
       </div>
+
+      {totalPages > 1 && (
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={setPage}
+          totalItems={videos.length}
+          pageSize={pageSize}
+        />
+      )}
 
       <AnimatePresence>
         {active && (
@@ -102,6 +122,6 @@ export default function VideoGrid({ videos }: { videos: MediaVideo[] }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </div>
   );
 }

@@ -1,13 +1,26 @@
 "use client";
-// import SectionHeading from "@/components/ui/SectionHeading";
 import { motion } from "motion/react";
 import NoticeBlock from "./theSport/NoticeBlock";
 import DocumentGrid from "./theSport/DocumentGrid";
 import CTASection from "./theSport/CTASection";
-import { competitionDocuments } from "@/data/documents";
+import { competitionDocuments, type DocumentEntry } from "@/data/documents";
 import AnimatedDivider from "@/components/common/Animateddivider";
+import { useFirestoreCollection } from "@/hooks/useFirestoreCollection";
+import type { DocumentDoc } from "@/types/document";
 
 export default function CompetitionRules() {
+  const { items: firestoreDocs } = useFirestoreCollection<DocumentDoc>("documents");
+
+  const firestoreDocuments: DocumentEntry[] = firestoreDocs.map((doc) => ({
+    title: doc.title,
+    description: doc.description,
+    fileUrl: doc.fileUrl,
+    fileSize: doc.fileSize,
+  }));
+
+  const displayDocuments =
+    firestoreDocuments.length > 0 ? firestoreDocuments : competitionDocuments;
+
   const container = {
     hidden: {},
     visible: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
@@ -21,15 +34,11 @@ export default function CompetitionRules() {
       transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
     },
   };
+
   return (
     <>
       <section className="py-[var(--spacing-sections-mobile)] md:py-[var(--spacing-sections-desktop)]">
         <div className="mx-auto w-full max-w-[1280px] px-4 xl:px-0">
-          {/* <SectionHeading
-            eyebrow="Official Documentation"
-            title="Competition Rules & Regulations"
-            description="Contains the official rules of World Mini Mini Football, competition regulations, disciplinary procedures, referee regulations, and all technical requirements governing the sport and its events. This section provides the standards and guidelines that players, teams, officials, and organizers must follow in all WMMF competitions and activities."
-          /> */}
           <motion.div
             variants={container}
             initial="hidden"
@@ -52,8 +61,7 @@ export default function CompetitionRules() {
               variants={item}
               className="mx-auto mt-4 font-body text-[15px] leading-relaxed text-muted-foreground"
             >
-              Competition Rules & Regulations" description="Contains the
-              official rules of World Mini Mini Football, competition
+              Contains the official rules of World Mini Mini Football, competition
               regulations, disciplinary procedures, referee regulations, and all
               technical requirements governing the sport and its events. This
               section provides the standards and guidelines that players, teams,
@@ -86,7 +94,7 @@ export default function CompetitionRules() {
           </div>
 
           <div className="mx-auto mt-12 max-w-3xl">
-            <DocumentGrid documents={competitionDocuments} />
+            <DocumentGrid documents={displayDocuments} />
           </div>
         </div>
       </section>

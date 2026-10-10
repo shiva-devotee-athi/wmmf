@@ -67,8 +67,8 @@ export default function PageBanner({
           className="object-cover"
         />
         {/* left-weighted scrim so text stays legible over the busy artwork */}
-        {/* <div className="absolute inset-0 bg-gradient-to-r from-white via-white/70 to-white/10" /> */}
-        {/* <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/40" /> */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/50 to-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/40" />
       </div>
 
       <motion.div
@@ -101,7 +101,7 @@ export default function PageBanner({
               initial="initial"
               animate={isInView ? "animate" : ""}
               custom={i}
-              className="hero-title text-[36px] leading-tight text-secondary-600 sm:text-[46px] md:text-[54px]"
+              className="hero-title text-[36px] leading-tight text-secondary-200 sm:text-[46px] md:text-[54px]"
             >
               {current == " " ? <span>&nbsp;</span> : current}
             </motion.div>

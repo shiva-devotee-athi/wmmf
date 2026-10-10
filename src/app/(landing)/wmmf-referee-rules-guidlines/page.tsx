@@ -29,7 +29,7 @@ const jsonLd = {
     "@type": "DigitalDocument",
     name: refereeHandbook.title,
     description: refereeHandbook.description,
-    url: `${siteConfig.url}${refereeHandbook.fileHref}`,
+    url: `${siteConfig.url}${refereeHandbook.fileUrl}`,
   },
 };
 

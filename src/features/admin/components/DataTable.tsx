@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Loader2, Pencil, Trash2 } from "lucide-react";
 import type { WithId } from "@/hooks/useFirestoreCollection";
+import Pagination from "@/components/common/Pagination";
 
 export type Column<T> = {
   header: string;
@@ -14,6 +16,7 @@ type Props<T extends Record<string, unknown>> = {
   rows: WithId<T>[];
   loading?: boolean;
   emptyLabel?: string;
+  pageSize?: number;
   onEdit?: (row: WithId<T>) => void;
   onDelete?: (row: WithId<T>) => void;
 };
@@ -23,11 +26,20 @@ export default function DataTable<T extends Record<string, unknown>>({
   rows,
   loading,
   emptyLabel = "No records yet.",
+  pageSize,
   onEdit,
   onDelete,
 }: Props<T>) {
+  const [page, setPage] = useState(1);
+
+  const totalPages = pageSize ? Math.ceil(rows.length / pageSize) : 1;
+  const safePage = Math.min(page, totalPages || 1);
+  const displayRows = pageSize
+    ? rows.slice((safePage - 1) * pageSize, safePage * pageSize)
+    : rows;
+
   return (
-    <div className="overflow-hidden rounded-[var(--card-corner-radius)] border border-black/[var(--card-border-opacity)] bg-white shadow-[var(--card-shadow-horizontal-offset)_var(--card-shadow-vertical-offset)_var(--card-shadow-blur-radius)_rgba(10,10,10,var(--card-shadow-opacity))]">
+    <div className="overflow-hidden rounded-[var(--card-corner-radius)] border border-gray-200 bg-white shadow-[var(--card-shadow-horizontal-offset)_var(--card-shadow-vertical-offset)_var(--card-shadow-blur-radius)_rgba(10,10,10,var(--card-shadow-opacity))]">
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>
@@ -67,7 +79,7 @@ export default function DataTable<T extends Record<string, unknown>>({
                 </td>
               </tr>
             ) : (
-              rows.map((row) => (
+              displayRows.map((row) => (
                 <tr
                   key={row.id}
                   className="border-b border-black/[0.05] last:border-none hover:bg-muted/30"
@@ -112,6 +124,18 @@ export default function DataTable<T extends Record<string, unknown>>({
           </tbody>
         </table>
       </div>
+
+      {pageSize && totalPages > 1 && (
+        <div className="border-t border-black/[0.06] bg-slate-50/50 p-4">
+          <Pagination
+            currentPage={safePage}
+            totalPages={totalPages}
+            onPageChange={setPage}
+            totalItems={rows.length}
+            pageSize={pageSize}
+          />
+        </div>
+      )}
     </div>
   );
 }
