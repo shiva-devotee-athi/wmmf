@@ -38,6 +38,10 @@ export const navItems: NavItem[] = [
   {
     label: "Members",
     href: "/members",
+    children: [
+      { label: "Members", href: "/members" },
+      { label: "Executive Board", href: "/executive-board" },
+    ],
     // children: [
     //   {
     //     label: "Member Countries",

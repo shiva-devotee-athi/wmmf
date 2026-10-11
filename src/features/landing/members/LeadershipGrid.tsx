@@ -31,11 +31,18 @@ export default function LeadershipGrid() {
   const { items: firestoreDocs, loading } =
     useFirestoreCollection<MemberDoc>("members");
 
+  // Build a lookup map from the static seed data so we can fall back to its
+  // image URL when a Firestore doc has an empty/missing image field.
+  const staticById = Object.fromEntries(
+    leadershipMembers.map((m) => [m.id, m]),
+  );
+
   const firestoreMembers: LeadershipMember[] = firestoreDocs.map((m) => ({
     id: m.id,
     name: m.name,
     role: m.role,
-    image: m.image,
+    // Use Firestore's image when it exists; otherwise fall back to the static one.
+    image: m.image || staticById[m.id]?.image || "",
     bio:
       typeof m.bio === "string"
         ? m.bio.split("\n\n").filter(Boolean)
@@ -44,8 +51,10 @@ export default function LeadershipGrid() {
           : [],
   }));
 
+  // While Firestore is still loading, keep showing static data to avoid a
+  // flash where cards briefly lose their images as the snapshot arrives.
   const allMembers =
-    firestoreMembers.length > 0 ? firestoreMembers : leadershipMembers;
+    !loading && firestoreMembers.length > 0 ? firestoreMembers : leadershipMembers;
 
   const pageSize = 12;
   const totalPages = Math.ceil(allMembers.length / pageSize);
@@ -100,9 +109,8 @@ export default function LeadershipGrid() {
           className="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-4"
         >
           {paginatedMembers.map((member) => (
-            <motion.button
+            <motion.div
               key={member.id}
-              type="button"
               variants={item}
               whileHover={{ y: -6 }}
               onClick={() => setActive(member)}
@@ -130,7 +138,7 @@ export default function LeadershipGrid() {
               <p className="mt-1 font-body text-[13px] text-muted-foreground">
                 {member.role}
               </p>
-            </motion.button>
+            </motion.div>
           ))}
         </motion.div>
 

@@ -12,6 +12,7 @@ import {
   Image as ImageIcon,
   LogOut,
   X,
+  UserRoundGroup,
 } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
@@ -20,6 +21,11 @@ const navItems = [
   { label: "Contact Messages", href: "/admin/messages", icon: MessageSquare },
   { label: "News", href: "/admin/news", icon: Newspaper },
   { label: "Members", href: "/admin/members", icon: Users },
+  {
+    label: "Executive Board",
+    href: "/admin/executive-board",
+    icon: UserRoundGroup,
+  },
   { label: "Documents", href: "/admin/documents", icon: FileText },
   { label: "Media", href: "/admin/media", icon: ImageIcon },
 ];
@@ -41,7 +47,7 @@ export default function Sidebar({ mobileOpen, onClose }: Props) {
 
   const content = (
     <div className="flex h-full flex-col bg-secondary-900">
-      <div className="flex items-center gap-2.5 px-6 py-6">
+      <div className="flex shrink-0 items-center gap-2.5 px-6 py-6">
         <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 font-heading text-sm font-bold text-white">
           W
         </span>
@@ -58,7 +64,7 @@ export default function Sidebar({ mobileOpen, onClose }: Props) {
         </button>
       </div>
 
-      <nav className="flex-1 space-y-1 px-3">
+      <nav className="flex-1 space-y-1 overflow-y-auto px-3">
         {navItems.map(({ label, href, icon: Icon }) => {
           const isActive = pathname === href;
           return (
@@ -79,7 +85,7 @@ export default function Sidebar({ mobileOpen, onClose }: Props) {
         })}
       </nav>
 
-      <div className="border-t border-white/10 p-4">
+      <div className="shrink-0 border-t border-white/10 p-4">
         <p className="truncate px-1.5 font-body text-[12px] text-white/50">
           {user?.email}
         </p>
@@ -98,8 +104,9 @@ export default function Sidebar({ mobileOpen, onClose }: Props) {
   return (
     <>
       {/* Desktop */}
-      <aside className="hidden w-64 shrink-0 lg:block">{content}</aside>
-
+      <aside className="sticky top-0 hidden h-screen w-64 shrink-0 lg:block">
+        {content}
+      </aside>
       {/* Mobile */}
       <AnimatePresence>
         {mobileOpen && (

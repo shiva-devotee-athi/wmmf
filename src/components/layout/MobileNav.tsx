@@ -31,7 +31,7 @@ export default function MobileNav({ open, onClose }: Props) {
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed inset-y-0 right-0 z-[70] flex w-[85%] max-w-sm flex-col bg-white shadow-2xl lg:hidden"
+            className="fixed h-screen inset-y-0 right-0 z-[70] flex w-[85%] max-w-sm flex-col bg-white shadow-2xl lg:hidden"
           >
             <div className="flex items-center justify-between border-b border-black/5 px-5 py-5">
               <span className="font-heading text-[14px] font-bold uppercase tracking-wide text-secondary-900">

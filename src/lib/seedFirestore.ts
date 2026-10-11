@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { newsItems } from "@/data/news";
-import { leadershipMembers } from "@/data/leadership";
+import { boardOfTrustees, leadershipMembers } from "@/data/leadership";
 import { mediaEvents } from "@/data/media";
 import { competitionDocuments, refereeHandbook } from "@/data/documents";
 import type { NewsDoc } from "@/types/news";
@@ -34,6 +34,7 @@ export async function seedFirestoreData(): Promise<{
   const details: Record<string, number> = {
     news: 0,
     members: 0,
+    executiveBoard: 0,
     mediaPhotos: 0,
     mediaVideos: 0,
     documents: 0,
@@ -79,6 +80,24 @@ export async function seedFirestoreData(): Promise<{
           createdAt: serverTimestamp(),
         });
         details.members++;
+      }
+    }
+
+    // 2. Seed Executive Board
+    const executiveBoardSnap = await getDocs(collection(db, "executive-board"));
+    if (executiveBoardSnap.empty) {
+      for (const m of boardOfTrustees) {
+        const executiveBoardData: MemberDoc = {
+          name: m.name,
+          role: m.role,
+          image: m.image,
+          bio: Array.isArray(m.bio) ? m.bio.join("\n\n") : m.bio || "",
+        };
+        await addDoc(collection(db, "executive-board"), {
+          ...executiveBoardData,
+          createdAt: serverTimestamp(),
+        });
+        details.executiveBoard++;
       }
     }
 

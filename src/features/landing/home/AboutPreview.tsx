@@ -7,11 +7,9 @@ import Image from "next/image";
 
 export default function AboutPreview() {
   return (
-
     <section className="relative overflow-hidden bg-slate-50/50 py-[var(--spacing-sections-mobile)] md:py-[var(--spacing-sections-desktop)] border-b border-slate-100">
       {/* Background Drawing / Sketches Watermark */}
       <div className="pointer-events-none absolute inset-0 z-0 opacity-[0.20]">
-
         <Image
           src="/images/sketches/sketch_1.webp"
           alt="Sports sketch background"
@@ -34,7 +32,7 @@ export default function AboutPreview() {
             alt="WMMF Official Representative"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
+            className="bg-[#e7e5e5] object-contain transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute bottom-5 left-5 rounded-xl border border-slate-100 bg-white/95 px-5 py-3.5 shadow-lg backdrop-blur-sm">
             <p className="font-heading text-xl font-bold text-primary-600">
@@ -54,7 +52,6 @@ export default function AboutPreview() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="relative"
         >
-
           <div className="flex items-center gap-2">
             <span className="font-heading text-[13px] font-bold uppercase tracking-[0.2em] text-secondary-900">
               Who We Are
@@ -68,11 +65,14 @@ export default function AboutPreview() {
 
           <p className="mt-5 font-body text-[15px] leading-relaxed text-muted-foreground sm:text-[15.5px]">
             World Mini Mini Football (WMMF) is the international organization
-            dedicated to developing and promoting World Mini Mini Football as a modern,
-            accessible, and exciting small-sided sport
+            dedicated to developing and promoting World Mini Mini Football as a
+            modern, accessible, and exciting small-sided sport
           </p>
           <p className="mt-5 font-body text-[15px] leading-relaxed text-muted-foreground sm:text-[15.5px]">
-            WMMF provides the framework for unified rules, development, education, officiating, and international competition, bringing players and Member Associations together through one organized global structure.
+            WMMF provides the framework for unified rules, development,
+            education, officiating, and international competition, bringing
+            players and Member Associations together through one organized
+            global structure.
           </p>
 
           <Link
