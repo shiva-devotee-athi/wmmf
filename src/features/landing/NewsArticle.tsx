@@ -84,6 +84,21 @@ export default function NewsArticle({ article, prev, next }: Props) {
           })}
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="prose-wmmf mt-8 space-y-2 font-body text-center leading-relaxed text-secondary-700"
+        >
+          <h3 className="font-heading text-xl md:text-2xl font-extrabold tracking-tight">
+            World Mini Mini Football (WMMF)
+          </h3>
+          <p className="mt-2 font-body text-sm md:text-sm font-medium tracking-wider text-primary-500 uppercase">
+            IT’S MORE THAN JUST A GAME
+          </p>
+        </motion.div>
+
         <div className="mt-10 flex flex-col gap-6 border-t border-black/[0.06] pt-6 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex flex-wrap items-center gap-2">
             <Tag className="h-3.5 w-3.5 text-secondary-400" />

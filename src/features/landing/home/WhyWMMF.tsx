@@ -167,7 +167,7 @@ export default function WhyWMMF() {
             {/* Checklist and Circular Contact Badge */}
             <div className="mt-8 flex flex-col justify-between gap-6 border-t border-slate-200/80 pt-7 sm:flex-row sm:items-center">
               {/* Checklist */}
-              <div className="space-y-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-x-4 gap-y-6">
                 {checklistItems.map((item) => (
                   <div key={item} className="flex items-center gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary-600 text-white">

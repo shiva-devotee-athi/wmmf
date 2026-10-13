@@ -52,7 +52,7 @@ export default function News() {
         <div className="mt-12">
           <NewsGrid />
         </div>
-        <motion.h2
+        {/* <motion.h2
           variants={item}
           className="font-heading text-[30px] font-bold text-secondary-900 sm:text-[36px] text-center mt-12"
         >
@@ -63,8 +63,8 @@ export default function News() {
         </motion.div>
         <motion.div variants={item} className="mt-3.5 flex justify-center">
           <AnimatedDivider color="bg-secondary-900" />
-        </motion.div>
-        <SplitContentLogo
+        </motion.div> */}
+        {/* <SplitContentLogo
           eyebrow="Our Mission"
           title='A New Way To Play. A New Way To Connect'
           imageSrc="/images/logos/logo.png"
@@ -78,7 +78,7 @@ export default function News() {
             "From the first touch to the final whistle, everyone is in the game.",
           ]}
 
-        />
+        /> */}
       </div>
     </section>
   );
