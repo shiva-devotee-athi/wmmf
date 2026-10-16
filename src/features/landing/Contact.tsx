@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Headset, MapPin, Smartphone } from "lucide-react";
+import { Mail, MapPin, Smartphone } from "lucide-react";
 import ContactForm from "./home/ContactForm";
 import { siteConfig } from "@/data/site";
 import AnimatedDivider from "@/components/common/Animateddivider";
 
 const infoItems = [
   {
-    icon: Headset,
+    icon: Mail,
     title: "Email",
     lines: [siteConfig.primary_email, siteConfig.secondary_email],
   },

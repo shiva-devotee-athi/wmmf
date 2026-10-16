@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Camera, Film } from "lucide-react";
+import { Camera, ChevronDown, Film } from "lucide-react";
 import AnimatedTabs from "@/components/common/AnimatedTabs";
 import PhotoGrid from "./gallery/PhotoGrid";
 import VideoGrid from "./gallery/VideoGrid";
@@ -20,6 +20,8 @@ export default function Gallery() {
 
   const [eventSlug, setEventSlug] = useState<string>("all");
   const [mediaType, setMediaType] = useState<MediaType>("photos");
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const firestoreEventsMap = new Map<string, string>();
   photoDocs.forEach((d) => {
@@ -85,19 +87,91 @@ export default function Gallery() {
   return (
     <section className="py-[var(--spacing-sections-mobile)] md:py-[var(--spacing-sections-desktop)]">
       <div className="mx-auto w-full max-w-[1280px] px-4 xl:px-0">
-        {/* Event tabs */}
+        {/* Event dropdown — only shown when there are multiple events */}
         {eventTabs.length > 1 && (
-          <div className="mb-8 flex flex-wrap justify-center gap-2">
-            <AnimatedTabs
-              tabs={eventTabs}
-              activeId={
-                eventSlug === "all" && !hasFirestoreMedia
-                  ? mediaEvents[0].slug
-                  : eventSlug
-              }
-              onChange={setEventSlug}
-              layoutId="event-tab-indicator"
-            />
+          <div className="mb-10 flex justify-center">
+            <div
+              ref={dropdownRef}
+              className="relative w-full max-w-xs"
+              onBlur={(e) => {
+                if (!dropdownRef.current?.contains(e.relatedTarget as Node)) {
+                  setDropdownOpen(false);
+                }
+              }}
+            >
+              {/* Trigger button */}
+              <button
+                id="gallery-event-select"
+                type="button"
+                onClick={() => setDropdownOpen((o) => !o)}
+                className="flex w-full items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 font-heading text-[14px] font-semibold text-secondary-900 shadow-sm transition-all duration-200 hover:border-primary-400 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary-400/50"
+              >
+                <span className="truncate">
+                  {eventTabs.find(
+                    (t) =>
+                      t.id ===
+                      (eventSlug === "all" && !hasFirestoreMedia
+                        ? mediaEvents[0].slug
+                        : eventSlug),
+                  )?.label ?? "All Events"}
+                </span>
+                <motion.span
+                  animate={{ rotate: dropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="shrink-0 text-slate-400"
+                >
+                  <ChevronDown className="h-4 w-4" />
+                </motion.span>
+              </button>
+
+              {/* Dropdown panel */}
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.ul
+                    key="event-dropdown"
+                    initial={{ opacity: 0, y: -6, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -6, scale: 0.98 }}
+                    transition={{ duration: 0.18, ease: "easeOut" }}
+                    className="absolute left-0 top-full z-50 mt-2 w-full overflow-hidden rounded-xl border border-slate-200 bg-white py-1 shadow-xl"
+                    role="listbox"
+                  >
+                    {eventTabs.map((tab) => {
+                      const isActive =
+                        tab.id ===
+                        (eventSlug === "all" && !hasFirestoreMedia
+                          ? mediaEvents[0].slug
+                          : eventSlug);
+                      return (
+                        <li key={tab.id} role="option" aria-selected={isActive}>
+                          <button
+                            type="button"
+                            tabIndex={0}
+                            onClick={() => {
+                              setEventSlug(tab.id);
+                              setDropdownOpen(false);
+                            }}
+                            className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-left font-heading text-[13.5px] font-medium transition-colors duration-150 ${
+                              isActive
+                                ? "bg-primary-50 text-primary-600"
+                                : "text-secondary-800 hover:bg-slate-50"
+                            }`}
+                          >
+                            {isActive && (
+                              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" />
+                            )}
+                            {!isActive && (
+                              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-transparent" />
+                            )}
+                            {tab.label}
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </motion.ul>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         )}
 
